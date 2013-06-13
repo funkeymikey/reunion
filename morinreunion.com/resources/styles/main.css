@@ -1,0 +1,103 @@
+﻿/*
+ http://meyerweb.com/eric/tools/css/reset/
+ <css reset>
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section{
+    display: block;
+}
+body{
+    line-height: 1;
+}
+ol, ul{
+    list-style: none;
+}
+blockquote, q{
+    quotes: none;
+}
+    blockquote:before, blockquote:after,
+    q:before, q:after    {
+        content: '';
+        content: none;
+    }
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/*
+ * </css reset>
+ */
+
+
+
+.tree
+{
+    width: 20em;
+    height: 20em;
+}
+
+.tree-content
+{
+    fill: #2385db;
+    fill-opacity: 1;
+}
+
+.tree-border
+{
+    fill: none;
+    stroke: #2385db;
+    stroke-width: 20;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-opacity: 1;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    marker: none;
+    visibility: visible;
+    display: inline;
+    overflow: visible;
+    enable-background: accumulate;
+
+    /*TODO: this is duplicated to disable the border*/
+    display: none;
+}
+
+.tree--header-logo
+{
+    width: 10em;
+    height: 10em;    
+    vertical-align: middle;
+}
+
+header
+{
+    text-align: center;
+}
+
+.title
+{
+    display: inline;
+    font-size: xx-large;
+    vertical-align: middle;
+}
