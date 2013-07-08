@@ -58,24 +58,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="resources\styles\main.css.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="resources\styles\main.css.designer.cs">
-      <DependentUpon>main.css.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="resources\images\tree.svg" />
     <Content Include="index.html" />
     <Content Include="resources\styles\main.css" />
+    <Content Include="resources\styles\stuff.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="resources\js\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\morinreunion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy.pubxml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="resources\js\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
