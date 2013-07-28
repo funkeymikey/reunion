@@ -62,8 +62,8 @@
   <ItemGroup>
     <Content Include="resources\images\tree.svg" />
     <Content Include="index.html" />
-    <Content Include="resources\styles\main.css" />
-    <Content Include="resources\styles\stuff.css" />
+    <Content Include="resources\css\main.css" />
+    <Content Include="resources\css\tree.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="resources\js\" />
@@ -71,6 +71,9 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\morinreunion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy.pubxml" />
+    <Content Include="resources\scss\main.scss" />
+    <Content Include="resources\scss\_colors.scss" />
+    <Content Include="resources\scss\tree.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

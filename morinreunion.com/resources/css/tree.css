@@ -1,0 +1,12 @@
+.tree {
+  width: 20em;
+  height: 20em; }
+
+.tree-content {
+  fill: #282828;
+  fill-opacity: 1; }
+
+.tree--header-logo {
+  width: 10em;
+  height: 10em;
+  vertical-align: middle; }
