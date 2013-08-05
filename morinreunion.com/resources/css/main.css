@@ -55,5 +55,22 @@ header {
 
 .title {
   display: inline;
-  font-size: xx-large;
   vertical-align: middle; }
+
+@media all and (min-width: 50em) {
+  .title {
+    font-size: xx-large; } }
+@media all and (min-width: 30em) and (max-width: 49.99em) {
+  .title {
+    font-size: x-large; } }
+@media all and (max-width: 29.99em) {
+  .title {
+    font-size: large; } }
+.section + .section {
+  margin-top: 80px; }
+
+.section-subsection + .section-subsection {
+  margin-top: 40px; }
+
+.map {
+  height: 350px; }

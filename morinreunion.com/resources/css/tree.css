@@ -1,12 +1,23 @@
 .tree {
-  width: 20em;
-  height: 20em; }
+  width: 10em;
+  height: 10em; }
 
 .tree-content {
   fill: #282828;
   fill-opacity: 1; }
 
 .tree--header-logo {
-  width: 10em;
-  height: 10em;
   vertical-align: middle; }
+
+@media all and (min-width: 50em) {
+  .tree--header-logo {
+    width: 10em;
+    height: 10em; } }
+@media all and (min-width: 30em) and (max-width: 49.99em) {
+  .tree--header-logo {
+    width: 7.5em;
+    height: 7.5em; } }
+@media all and (max-width: 29.99em) {
+  .tree--header-logo {
+    width: 5em;
+    height: 5em; } }
