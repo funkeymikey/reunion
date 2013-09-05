@@ -26,7 +26,7 @@
 
             <div class="title">Morin Family Reunion</div>
 
-            <div class="navbar">
+            <div class="navbar header-nav">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Info</a>
@@ -44,7 +44,7 @@
             </div>
         </header>
 
-        <div class="col col-12">
+        <div class="col col-12 main-content">
             <section class="section">
                 <div class="page-header">
                     <h1 id="info">Info</h1>
@@ -118,8 +118,28 @@
 
                 <p>Sign up for your committee here</p>
             </section>
+
+            
         </div>
-    </div>
+   
+        <footer>
+                <div class="navbar footer-nav" >
+                    <div>
+                        Browse to: 
+                        <select id="footer-nav" onchange="redirect()" >
+                            <option value="#info-when">When</option>
+                            <option value="#info-where">Where</option>
+                            <option value="#info-itinerary">Itinerary</option>
+                            <option value="#info-cost">Cost</option>
+                            <option value="#rsvp">RSVP</option>
+                            <option value="#suggest">Suggest an activity</option>
+                            <option value="#committee">Committee sign up</option>
+                        </select>
+                    </div>
+                </div>
+            </footer>
+         </div>
+
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
@@ -133,6 +153,10 @@
 
         ga('create', 'UA-42939168-1', 'morinreunion.com');
         ga('send', 'pageview');
+
+        function redirect() {
+            window.location.href = $('#footer-nav :selected').val();
+        }
     </script>
 </body>
 </html>
