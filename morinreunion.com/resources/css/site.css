@@ -1,4 +1,8 @@
 /*
+  list all the other files to be imported.  They'll all get concatenated by the sass command
+  sass --watch scss/site.css:css/site.css
+  */
+/*
  http://meyerweb.com/eric/tools/css/reset/
  <css reset>
 */
@@ -50,7 +54,15 @@ table {
 body {
   color: #282828; }
 
-header {
+.content {
+  width: 90vw;
+  margin: 0 5vw auto; }
+  @media screen and (min-width: 60em) {
+    .content {
+      width: 60em;
+      margin: 0 auto; } }
+
+.header-content {
   text-align: center; }
 
 .title {
@@ -75,33 +87,43 @@ header {
 .map {
   height: 350px; }
 
-.main-content {
-  margin-bottom: 1.5em; }
+.tree {
+  width: 10em;
+  height: 10em; }
+
+.tree-content {
+  fill: #282828;
+  fill-opacity: 1; }
+
+.tree--header-logo {
+  vertical-align: middle;
+  width: 20vw; }
 
 .header-nav {
-  /* hide it at 30 characters wide - width of the menu*/
-  /* override the default bootstrap breakpoint of 768 pixels */ }
-  @media screen and (max-width: 30em) {
-    .header-nav {
-      display: none; } }
-  @media screen and (min-width: 768px) {
-    .header-nav {
-      display: block; } }
-  @media screen and (max-width: 768px) {
-    .header-nav li {
-      float: left; } }
+  position: relative;
+  min-height: 50px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+  min-width: 260px; }
 
-.footer-nav {
-  position: fixed;
-  bottom: 0;
-  line-height: 1.5em;
-  vertical-align: middle;
-  background-color: white;
-  width: 100%;
-  /* show it at 30 characters wide - width of the menu*/ }
-  @media screen and (max-width: 30em) {
-    .footer-nav {
-      display: block; } }
-  @media screen and (min-width: 30em) {
-    .footer-nav {
-      display: none; } }
+.header-nav > ul {
+  float: left;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none; }
+
+.header-nav > ul > li {
+  float: left;
+  position: relative;
+  display: block; }
+
+.header-nav > ul > li > a {
+  line-height: 20px;
+  color: #777;
+  position: relative;
+  display: block;
+  padding: 15px; }

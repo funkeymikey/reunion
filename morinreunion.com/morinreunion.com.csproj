@@ -60,20 +60,45 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\images\tree.svg" />
+    <Content Include="index-async.html" />
+    <Content Include="index-old.html" />
     <Content Include="index.html" />
     <Content Include="resources\css\main.css" />
     <Content Include="resources\css\tree.css" />
+    <Content Include="resources\images\tree.svg" />
+    <Content Include="views\directions.html" />
+    <Content Include="views\gallery.html" />
+    <Content Include="views\home.html" />
+    <Content Include="views\login.html" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="resources\js\" />
+    <Folder Include="partials\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="js\app.js" />
+    <Content Include="js\controllers.js" />
+    <Content Include="js\directives.js" />
+    <Content Include="js\filters.js" />
+    <Content Include="js\services.js" />
+    <Content Include="lib\angular\angular-cookies.js" />
+    <Content Include="lib\angular\angular-cookies.min.js" />
+    <Content Include="lib\angular\angular-loader.js" />
+    <Content Include="lib\angular\angular-loader.min.js" />
+    <Content Include="lib\angular\angular-resource.js" />
+    <Content Include="lib\angular\angular-resource.min.js" />
+    <Content Include="lib\angular\angular-sanitize.js" />
+    <Content Include="lib\angular\angular-sanitize.min.js" />
+    <Content Include="lib\angular\angular.js" />
+    <Content Include="lib\angular\angular.min.js" />
+    <Content Include="lib\angular\version.txt" />
     <None Include="Properties\PublishProfiles\morinreunion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy.pubxml" />
+    <Content Include="resources\.sass-cache\c7461a7614260ca899c2bd3ebfafe759ba4fcb97\main.scssc" />
+    <Content Include="resources\.sass-cache\c7461a7614260ca899c2bd3ebfafe759ba4fcb97\tree.scssc" />
+    <Content Include="resources\.sass-cache\c7461a7614260ca899c2bd3ebfafe759ba4fcb97\_colors.scssc" />
     <Content Include="resources\scss\main.scss" />
-    <Content Include="resources\scss\_colors.scss" />
     <Content Include="resources\scss\tree.scss" />
+    <Content Include="resources\scss\_colors.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

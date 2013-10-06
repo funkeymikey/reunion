@@ -62,7 +62,17 @@ body {
     color: $black;
 }
 
-header {
+.content{
+	width: 90vw;
+	margin: 0 5vw auto;
+
+	@media screen and (min-width: 60em){
+		width: 60em;
+		margin: 0 auto;
+  }
+}
+
+.header-content {
     text-align: center;
 }
 
@@ -94,48 +104,4 @@ header {
 
 .map {
     height: 350px;
-}
-
-.main-content {
-    margin-bottom: 1.5em;
-}
-
-.header-nav {
-
-    /* hide it at 30 characters wide - width of the menu*/
-    @media screen and (max-width: 30em){
-        display: none;
-    }
-
-
-    /* override the default bootstrap breakpoint of 768 pixels */
-    @media screen and (min-width: 768px){
-        display: block;
-    }
-
-    li {
-        @media screen and (max-width: 768px) {
-            float: left;
-        }
-    }
-}
-
-
-
-
-.footer-nav {
-    position: fixed;
-    bottom: 0;
-    line-height: 1.5em;
-    vertical-align: middle;
-    background-color: white;
-    width: 100%;
-
-    /* show it at 30 characters wide - width of the menu*/
-    @media screen and (max-width: 30em){
-        display: block;
-    }
-    @media screen and (min-width: 30em){
-        display: none;
-    }
 }
