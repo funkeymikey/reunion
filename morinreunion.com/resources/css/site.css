@@ -54,9 +54,12 @@ table {
 body {
   color: #282828; }
 
+.ng-cloak {
+  display: none; }
+
 .content {
-  width: 90vw;
-  margin: 0 5vw auto; }
+  width: 90%;
+  margin: 0 5% auto; }
   @media screen and (min-width: 60em) {
     .content {
       width: 60em;

@@ -63,10 +63,11 @@
     <Content Include="index-async.html" />
     <Content Include="index-old.html" />
     <Content Include="index.html" />
-    <Content Include="resources\css\main.css" />
-    <Content Include="resources\css\tree.css" />
+    <Content Include="resources\css\site.css" />
     <Content Include="resources\images\tree.svg" />
-    <Content Include="views\directions.html" />
+    <Content Include="resources\scss\nav.scss" />
+    <None Include="resources\scss\site.scss" />
+    <Content Include="views\signup.html" />
     <Content Include="views\gallery.html" />
     <Content Include="views\home.html" />
     <Content Include="views\login.html" />
@@ -93,9 +94,6 @@
     <Content Include="lib\angular\version.txt" />
     <None Include="Properties\PublishProfiles\morinreunion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy.pubxml" />
-    <Content Include="resources\.sass-cache\c7461a7614260ca899c2bd3ebfafe759ba4fcb97\main.scssc" />
-    <Content Include="resources\.sass-cache\c7461a7614260ca899c2bd3ebfafe759ba4fcb97\tree.scssc" />
-    <Content Include="resources\.sass-cache\c7461a7614260ca899c2bd3ebfafe759ba4fcb97\_colors.scssc" />
     <Content Include="resources\scss\main.scss" />
     <Content Include="resources\scss\tree.scss" />
     <Content Include="resources\scss\_colors.scss" />
