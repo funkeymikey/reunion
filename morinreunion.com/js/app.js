@@ -18,3 +18,5 @@ reunion.run(['$rootScope', '$route', function ($rootScope, $route) {
     $rootScope.pageTitle = $route.current.title;
   });
 }]);
+
+reunion.constant('EMAIL_SERVICE', 'http://reunionemailservice.azurewebsites.net/Email');
