@@ -8,7 +8,7 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/home', { templateUrl: 'views/home.html', controller: 'HomeCtrl', title: 'Home', caseInsensitiveMatch: true });
   $routeProvider.when('/gallery', { templateUrl: 'views/gallery.html', controller: 'GalleryCtrl', title: 'Gallery', caseInsensitiveMatch: true });
   $routeProvider.when('/signup', { templateUrl: 'views/activities.html', controller: 'ActivitesCtrl', title: 'Activities', caseInsensitiveMatch: true });
-  $routeProvider.when('/signup', { templateUrl: 'views/help.html', controller: 'HelpCtrl', title: 'Help Out', caseInsensitiveMatch: true });
+  $routeProvider.when('/help', { templateUrl: 'views/help.html', controller: 'HelpCtrl', title: 'Help Out', caseInsensitiveMatch: true });
   $routeProvider.otherwise({ redirectTo: '/' });
 }]);
 
