@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var reunion = angular.module('reunion', ['ngRoute', 'reunion.controllers', 'reunion.directives', 'reunion.filters', 'reunion.services']);
+var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'reunion.directives', 'reunion.filters', 'reunion.services']);
 
 reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/', { templateUrl: 'views/login.html', controller: 'LoginCtrl', title: 'Login', caseInsensitiveMatch: true });
@@ -12,11 +12,11 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.otherwise({ redirectTo: '/' });
 }]);
 
-reunion.run(['$rootScope', '$route', function ($rootScope, $route) {
+reunion.run(['$rootScope', '$route', '$resource', function ($rootScope, $route, $resource) {
   //load up the title property from the routes as the page title
   $rootScope.$on("$routeChangeSuccess", function (currentRoute, previousRoute) {
     $rootScope.pageTitle = $route.current.title;
   });
-}]);
 
-reunion.constant('EMAIL_SERVICE', 'http://reunionemailservice.azurewebsites.net/Email');
+  $rootScope.EmailService = $resource('http://reunionemailservice.azurewebsites.net/Email');
+}]);

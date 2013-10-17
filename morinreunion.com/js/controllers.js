@@ -4,8 +4,13 @@
 
 var controllers = angular.module('reunion.controllers', []);
   
-controllers.controller('LoginCtrl', ['$rootScope', function ($rootScope) {
+controllers.controller('LoginCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
   $rootScope.authenticated = false;
+
+  $scope.doThing = function () {
+    alert($scope.emailAddress);
+    $rootScope.EmailService.get({ email: $scope.emailAddress });
+  };
 }]);
 
 controllers.controller('HomeCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {

@@ -15,6 +15,16 @@ namespace EmailService
     protected void Application_Start()
     {
       WebApiConfig.Register(GlobalConfiguration.Configuration);
+
     }
+
+    protected void Application_EndRequest()
+    {
+      if (!string.IsNullOrWhiteSpace(Request.Headers["origin"]))
+      {
+        Response.Headers.Add("Access-Control-Allow-Origin", "*");
+      }
+    }
+
   }
 }
