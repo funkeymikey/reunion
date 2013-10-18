@@ -11,7 +11,7 @@ namespace EmailService.Controllers
             CloudBlockBlob emailBlob = this.GetEmailBlob();
             string emails = await emailBlob.DownloadTextAsync();
 
-            if (!emails.Contains(email))
+            if (!emails.ToLower().Contains(email.ToLower()))
                 return new { result = false };
 
             return new { result = true };
@@ -26,7 +26,7 @@ namespace EmailService.Controllers
             string emails = await emailBlob.DownloadTextAsync();
 
             //if it already exists, just leave
-            if (emails.Contains(email))
+            if (emails.ToLower().Contains(email.ToLower()))
                 return new { result = false, reason="Already Exists" };
 
             //insert a newline delimiter
