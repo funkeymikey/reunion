@@ -86,10 +86,16 @@ body {
 .map {
   height: 350px; }
 
-input.ng-invalid {
+input.ng-invalid,
+.invalidEmail {
   outline: 0;
   border-color: red;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6); }
+
+.validEmail {
+  outline: 0;
+  border-color: green;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6); }
 
 .tree {
   width: 10em;

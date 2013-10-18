@@ -1,5 +1,6 @@
 ﻿Welcome to the home of the Morin Family Reunion.  In order to validate access, please enter your email address below to enter.
 <form name="login" data-ng-submit="doThing()">
-  <input type="email" placeholder="Email Address" data-ng-model="emailAddress"/>
-  <input type="submit" data-ng-click="doThing()" value="Enter"></input>
+  <input type="email" placeholder="Email Address" data-ng-model="emailAddress" data-ng-class="{validEmail:isGood}"/>
+  <input type="submit" data-ng-click="doThing()" value="Enter" />
 </form>
+
