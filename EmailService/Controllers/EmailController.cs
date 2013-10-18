@@ -1,6 +1,6 @@
-﻿using Microsoft.WindowsAzure.Storage.Blob;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace EmailService.Controllers
 {

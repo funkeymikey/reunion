@@ -1,8 +1,8 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
 using System.Web.Http;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace EmailService
 {
@@ -31,7 +31,7 @@ namespace EmailService
 
       if (!emailBlob.Exists())
       {
-        //Empty memory stream. Will create an empty blob.
+        //load an empty memory stream. Will create an empty blob.
         using (MemoryStream ms = new MemoryStream())
           emailBlob.UploadFromStream(ms);
       }

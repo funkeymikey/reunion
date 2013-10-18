@@ -1,29 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ingestor
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             string[] emails = File.ReadAllLines("../../Emails.txt");
 
-            new Program().LoadEmails(emails);
+            //do it
+            bool success = new Program().LoadEmails(emails);
 
+            string message = success ? "Completed successfully" : "Completed with errors";
+                
             Console.WriteLine();
-            Console.WriteLine("Completed");
-            Console.Read();
+            Console.WriteLine(message);
+            
+            if (!success)
+                Console.Read();
         }
 
-        public void LoadEmails(string[] emails)
+        public bool LoadEmails(string[] emails)
         {
+            bool completedSuccessfully = true;
+
             //set up the client
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://reunionemailservice.azurewebsites.net/");
@@ -45,9 +49,13 @@ namespace Ingestor
                 HttpResponseMessage response = client.PostAsync("Email", content).Result;
 
                 if (!response.IsSuccessStatusCode)
+                {
+                    completedSuccessfully = false;
                     Console.Error.WriteLine(response.StatusCode + "\t" + response.ReasonPhrase);
+                }
             }
 
+            return completedSuccessfully;
         }
     }
 }
