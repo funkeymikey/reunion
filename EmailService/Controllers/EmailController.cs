@@ -6,15 +6,15 @@ namespace EmailService.Controllers
 {
   public class EmailController : EmailBaseController
   {
-    public async Task<string> Get(string email)
+    public async Task<dynamic> Get(string email)
     {
       CloudBlockBlob emailBlob = this.GetEmailBlob();
       string emails = await emailBlob.DownloadTextAsync();
 
       if (!emails.Contains(email))
-        return null;
+        return new { result = false };
 
-      return email;
+      return new { result = true };
     }
 
     public async void Post([FromBody]string email)

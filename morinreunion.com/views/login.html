@@ -1,2 +1,4 @@
-﻿Login here <input type="email" placeholder="email address" data-ng-model="emailAddress"/>
-<button data-ng-click="doThing()" >click</button>
+﻿<form name="login" data-ng-submit="doThing()">
+  Enter your email address <input type="email" placeholder="email address" data-ng-model="emailAddress"/>
+  <button data-ng-click="doThing()" >click</button>
+</form>

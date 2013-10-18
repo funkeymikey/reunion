@@ -20,6 +20,7 @@ namespace EmailService
 
     protected void Application_EndRequest()
     {
+      //TODO: this better
       if (!string.IsNullOrWhiteSpace(Request.Headers["origin"]))
       {
         Response.Headers.Add("Access-Control-Allow-Origin", "*");

@@ -18,5 +18,5 @@ reunion.run(['$rootScope', '$route', '$resource', function ($rootScope, $route, 
     $rootScope.pageTitle = $route.current.title;
   });
 
-  $rootScope.EmailService = $resource('http://reunionemailservice.azurewebsites.net/Email');
+  $rootScope.EmailService = $resource('http://reunionemailservice.azurewebsites.net/Email', {}, { isArray: false });
 }]);
