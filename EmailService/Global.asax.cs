@@ -18,13 +18,36 @@ namespace EmailService
 
     }
 
-    protected void Application_EndRequest()
+    /// <summary>
+    /// Before we send out the results, check if this is a CORS request, add necessary headers
+    /// </summary>
+    protected void Application_PreRequestHandlerExecute()
     {
-      //TODO: this better
-      if (!string.IsNullOrWhiteSpace(Request.Headers["origin"]))
-      {
-        Response.Headers.Add("Access-Control-Allow-Origin", "*");
-      }
+        if (Request.IsCorsRequest())
+            AddCorsHeaders();
+    }
+
+    /// <summary>
+    /// Adds the following headers to the response:
+    ///     Access-Control-Allow-Origin
+    ///     Access-Control-Allow-Credentials
+    ///     Access-Control-Allow-Methods
+    ///     Access-Control-Allow-Headers
+    /// </summary>
+    private void AddCorsHeaders()
+    {
+        //enable the CORS requests, but signal R automatically adds these if necessary, so check for that
+        if (Request.Url.LocalPath.StartsWith("/signalr", StringComparison.InvariantCultureIgnoreCase))
+            return;
+
+        Response.Headers["Access-Control-Allow-Origin"] = Request.Headers["Origin"];
+        if (String.IsNullOrWhiteSpace(Response.Headers["Access-Control-Allow-Credentials"]))
+            Response.Headers["Access-Control-Allow-Credentials"] = "true";
+        if (String.IsNullOrWhiteSpace(Response.Headers["Access-Control-Allow-Methods"]))
+            Response.Headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS";
+        if (String.IsNullOrWhiteSpace(Response.Headers["Access-Control-Allow-Headers"]))
+            Response.Headers["Access-Control-Allow-Headers"] = "Content-Type, Accept, X-Requested-With";
+
     }
 
   }
