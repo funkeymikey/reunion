@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "morinreunion.com", "morinreunion.com\morinreunion.com.csproj", "{E6E2D7CC-BB2D-41B0-8A23-AD62B413EE59}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}"
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		notes\2013.10.09.txt = notes\2013.10.09.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ingestor", "Ingestor\Ingestor.csproj", "{CE6E9312-540A-424E-ADBB-3ABA1B614867}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

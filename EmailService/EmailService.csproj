@@ -132,7 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ConnectionStrings.config" />
+    <None Include="Properties\PublishProfiles\reunionemailservice - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\reunionemailservice - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\reunionemailservice - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\reunionemailservice - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>

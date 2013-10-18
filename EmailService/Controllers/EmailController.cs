@@ -4,33 +4,38 @@ using System.Web.Http;
 
 namespace EmailService.Controllers
 {
-  public class EmailController : EmailBaseController
-  {
-    public async Task<dynamic> Get(string email)
+    public class EmailController : EmailBaseController
     {
-      CloudBlockBlob emailBlob = this.GetEmailBlob();
-      string emails = await emailBlob.DownloadTextAsync();
+        public async Task<dynamic> Get(string email)
+        {
+            CloudBlockBlob emailBlob = this.GetEmailBlob();
+            string emails = await emailBlob.DownloadTextAsync();
 
-      if (!emails.Contains(email))
-        return new { result = false };
+            if (!emails.Contains(email))
+                return new { result = false };
 
-      return new { result = true };
+            return new { result = true };
+        }
+
+        public async Task<dynamic> Post([FromBody]string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return new { result = false, reason = "null input" };
+
+            CloudBlockBlob emailBlob = this.GetEmailBlob();
+            string emails = await emailBlob.DownloadTextAsync();
+
+            //if it already exists, just leave
+            if (emails.Contains(email))
+                return new { result = false, reason="Already Exists" };
+
+            //insert a newline delimiter
+            emails += "\n" + email;
+
+            await emailBlob.UploadTextAsync(emails);
+
+            return new { result = true };
+        }
+
     }
-
-    public async void Post([FromBody]string email)
-    {
-      CloudBlockBlob emailBlob = this.GetEmailBlob();
-      string emails = await emailBlob.DownloadTextAsync();
-
-      //if it already exists, just leave
-      if (emails.Contains(email))
-        return;
-
-      //insert a newline delimiter
-      emails += "\n" + email;
-
-      await emailBlob.UploadTextAsync(emails);      
-    }
-    
-  }
 }
