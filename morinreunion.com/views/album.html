@@ -1,0 +1,10 @@
+<h1>{{albumHeader.title}}</h1>
+
+<ul>
+  <li data-ng-repeat="item in album">
+    <div class="grid_2">
+      <img data-ng-src="{{item.url500}}" alt="{{item.name}}" />
+      <strong>{{item.name}}</strong>
+    </div>
+  </li>
+</ul>

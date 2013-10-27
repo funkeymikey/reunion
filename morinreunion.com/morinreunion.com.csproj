@@ -60,8 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index-async.html" />
-    <Content Include="index-old.html" />
     <Content Include="index.html" />
     <Content Include="views\partials\committee-representatives.html" />
     <Content Include="resources\css\site.css" />
@@ -73,7 +71,6 @@
     <None Include="resources\scss\site.scss" />
     <Content Include="views\activities.html" />
     <Content Include="views\help.html" />
-    <Content Include="views\signup.html" />
     <Content Include="views\gallery.html" />
     <Content Include="views\home.html" />
     <Content Include="views\login.html" />

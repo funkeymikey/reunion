@@ -9,6 +9,7 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/gallery', { templateUrl: 'views/gallery.html', controller: 'GalleryCtrl', title: 'Gallery', caseInsensitiveMatch: true });
   $routeProvider.when('/activities', { templateUrl: 'views/activities.html', controller: 'ActivitesCtrl', title: 'Activities', caseInsensitiveMatch: true });
   $routeProvider.when('/help', { templateUrl: 'views/help.html', controller: 'HelpCtrl', title: 'Help Out', caseInsensitiveMatch: true });
+  $routeProvider.when('/album/:albumId', { templateUrl: 'views/album.html', controller: 'AlbumCtrl', title: 'View Album', caseInsensitiveMatch: true });
   $routeProvider.otherwise({ redirectTo: '/' });
 }]);
 
@@ -38,8 +39,8 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
   };
 
   $rootScope.checkAuthentication = function () {
-    if (!$rootScope.authenticated)
-      $location.path('/');
+    //if (!$rootScope.authenticated)
+    //  $location.path('/');
   }
 
 }]);
@@ -47,4 +48,7 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
 
 reunion.factory('EmailService', ['$resource', function ($resource) {
     return $resource('http://reunionemailservice.azurewebsites.net/Email', {}, { isArray: false });
+}]);
+reunion.factory('FlickrService', ['$resource', function ($resource) {
+  return $resource('http://api.flickr.com/services/rest/', {}, { isArray: false });
 }]);

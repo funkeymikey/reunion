@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FlickrNet">
+      <HintPath>..\packages\FlickrNet.3.8.0\lib\net20\FlickrNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.WindowsAzure.Configuration">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
@@ -109,6 +112,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmailListController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\FlickrController.cs" />
     <Compile Include="EmailBaseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -132,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ConnectionStrings.config" />
+    <Content Include="FlickrNet.chm" />
     <None Include="Properties\PublishProfiles\reunionemailservice - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\reunionemailservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\reunionemailservice - Web Deploy %282%29.pubxml" />

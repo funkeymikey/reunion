@@ -1,1 +1,10 @@
-Gallery
+<h1>Gallery</h1>
+
+<ul>
+  <li data-ng-repeat="album in gallery">
+    <div class="grid_2">
+      <a href="#/album/{{album.id}}"><img data-ng-src="{{album.imageUrl}}" alt="{{album.title}}" /></a>
+      <strong>{{album.title}}</strong>
+    </div>
+  </li>
+</ul>
