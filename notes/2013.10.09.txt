@@ -1,3 +1,6 @@
+kibosh the signup page
+kibosh the sunday activities
+
 Home:
 	rsvp
 	where
@@ -17,15 +20,13 @@ Activities:
 	 Corn Hole Bean Bag
 	 Volleyball
 	 Write in 
- 
+
 Help out:
 	want to help out? we'll need help in this?
 	link to view the doc
 	set up committee should say "friday set up team"
 	tear down committee should say "monday tear down team"
+ ----------------------------------------------
  
 Gallery:
 	build it
-
-kibosh the signup page
-kibosh the sunday activities

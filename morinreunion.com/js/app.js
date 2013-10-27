@@ -28,12 +28,19 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
     for (var r in $rootScope.routes)
       if ($rootScope.routes[r].path === $route.current.originalPath)
         $rootScope.currentRoute = $rootScope.routes[r];
+
+    //TODO: can we check for authentication here?
   });
   
   //called by the dropdown footer nav
   $rootScope.redirect = function () {
     $location.path($rootScope.currentRoute.path);
   };
+
+  $rootScope.checkAuthentication = function () {
+    if (!$rootScope.authenticated)
+      $location.path('/');
+  }
 
 }]);
 

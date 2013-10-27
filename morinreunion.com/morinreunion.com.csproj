@@ -63,6 +63,7 @@
     <Content Include="index-async.html" />
     <Content Include="index-old.html" />
     <Content Include="index.html" />
+    <Content Include="views\partials\committee-representatives.html" />
     <Content Include="resources\css\site.css" />
     <Content Include="resources\images\tree.svg" />
     <Content Include="resources\scss\nav.scss" />
@@ -77,9 +78,7 @@
     <Content Include="views\home.html" />
     <Content Include="views\login.html" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="partials\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="js\app.js" />
     <Content Include="js\controllers.js" />

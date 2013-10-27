@@ -43,17 +43,12 @@ body {
     }
 }
 
-
-.section + .section {
-    margin-top: 80px;
+section + section {
+	margin-top: 5ex;
 }
 
-.section-subsection + .section-subsection {
-    margin-top: 40px;
-}
-
-.map {
-    height: 350px;
+.link{
+	cursor: pointer;
 }
 
 input.ng-invalid,
@@ -71,10 +66,6 @@ input.ng-invalid,
 
 .email-input{
 	width: 15em !important;
-}
-
-.new-element{
-	padding-top: 10px;
 }
 
 .error{
