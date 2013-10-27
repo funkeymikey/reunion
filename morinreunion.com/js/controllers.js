@@ -6,35 +6,36 @@ var controllers = angular.module('reunion.controllers', []);
   
 controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'EmailService', function ($rootScope, $scope, $location, EmailService) {
   $rootScope.authenticated = false;
+  $scope.isValidEmail = true;
 
-  $scope.doThing = function () {
-    
+  $scope.validateEmail = function () {
+    $rootScope.processing = true;
     EmailService.get({ email: $scope.emailAddress }, function (result) {
-      if (result.result)
+      if (result.result) {
+        $rootScope.authenticated = true;
         $location.path('/home');
-      else
-        alert('no');
-    });
+        $rootScope.processing = false;
+      } else {
+        $scope.isValidEmail = false;
+        $rootScope.processing = false;
+      }});
   };
 
-
-  /*
-      if (!$scope.emailAddress)
-          $scope.isGood = false;
-    else      
-      EmailService.get({ email: $scope.emailAddress }, function () {
-          alert('good');     }, function () { alert('error'); });
-  
-  */
 }]);
 
-controllers.controller('HomeCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
-  $rootScope.authenticated = true;
-  $scope.message = "hey there";
+controllers.controller('HomeCtrl', ['$rootScope', '$location', '$scope', function ($rootScope, $location, $scope) {
+  if (!$rootScope.authenticated)
+    $location.path('/');
 }]);
-controllers.controller('SignupCtrl', ['$rootScope', function ($rootScope) {
-  $rootScope.authenticated = true;
+controllers.controller('HelpCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
+  if (!$rootScope.authenticated)
+    $location.path('/');
 }]);
-controllers.controller('GalleryCtrl', ['$rootScope', function ($rootScope) {
-  $rootScope.authenticated = true;
+controllers.controller('GalleryCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
+  if (!$rootScope.authenticated)
+    $location.path('/');
+}]);
+controllers.controller('ActivitesCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
+  if (!$rootScope.authenticated)
+    $location.path('/');
 }]);

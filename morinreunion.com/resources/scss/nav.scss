@@ -7,6 +7,10 @@
 	background-color: #eee;
 	border-radius: 4px;
 	min-width:260px;
+	 
+	@media (max-width: 26em) {
+    display: none;
+  }
 }
 .header-nav>ul {
 	float: left;
@@ -26,4 +30,17 @@
 	position: relative;
 	display: block;
 	padding: 15px;
+}
+
+.footer-nav{
+	position: fixed;
+	height: 3ex;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: white;
+	padding: .25ex;
+	@media (min-width: 26em) {
+    display: none;
+  }
 }

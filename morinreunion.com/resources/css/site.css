@@ -2,51 +2,6 @@
   list all the other files to be imported.  They'll all get concatenated by the sass command
   sass --watch scss/site.scss:css/site.css
   */
-/*
- http://meyerweb.com/eric/tools/css/reset/
- <css reset>
-*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
-
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
-
-body {
-  line-height: 1; }
-
-blockquote, q {
-  quotes: none; }
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none; }
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
-
-/*
- * </css reset>
- */
 body {
   color: #282828; }
 
@@ -97,6 +52,15 @@ input.ng-invalid,
   border-color: green;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6); }
 
+.email-input {
+  width: 15em !important; }
+
+.new-element {
+  padding-top: 10px; }
+
+.error {
+  color: red; }
+
 .tree {
   width: 10em;
   height: 10em; }
@@ -118,6 +82,9 @@ input.ng-invalid,
   background-color: #eee;
   border-radius: 4px;
   min-width: 260px; }
+  @media (max-width: 26em) {
+    .header-nav {
+      display: none; } }
 
 .header-nav > ul {
   float: left;
@@ -137,3 +104,29 @@ input.ng-invalid,
   position: relative;
   display: block;
   padding: 15px; }
+
+.footer-nav {
+  position: fixed;
+  height: 3ex;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: .25ex; }
+  @media (min-width: 26em) {
+    .footer-nav {
+      display: none; } }
+
+.validEmail {
+  outline: 0;
+  border-color: green;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 255, 0, 0.6); }
+
+.email-input {
+  width: 15em; }
+
+.login {
+  text-align: center; }
+
+.login-form {
+  padding: 10px 0; }

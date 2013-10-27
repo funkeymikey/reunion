@@ -1,6 +1,11 @@
-﻿Welcome to the home of the Morin Family Reunion.  In order to validate access, please enter your email address below to enter.
-<form name="login" data-ng-submit="doThing()">
-  <input type="email" placeholder="Email Address" data-ng-model="emailAddress" data-ng-class="{validEmail:isGood}"/>
-  <input type="submit" data-ng-click="doThing()" value="Enter" />
+﻿Welcome to the home of the Morin Family Reunion.  In order to validate access, please enter your email address below to enter.  If your email address is not in the valid list,
+please alert your family's delegate on the reunion comittee to get it added.
+  
+<div class="error new-element" data-ng-if="!isValidEmail">
+  The specified email adress is not in the list of valid email addresses.
+</div>
+<form name="login" class="new-element form-inline" data-ng-submit="validateEmail()">
+  <label for="email-input">Email address</label>
+  <input type="email" class="email-input form-control" placeholder="Email Address" id="email-input" data-ng-model="emailAddress" />
+  <button type="submit" class="btn btn-submit" data-ng-click="validateEmail()">Enter</button>
 </form>
-

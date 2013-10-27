@@ -68,7 +68,10 @@
     <Content Include="resources\scss\nav.scss" />
     <None Include="Properties\PublishProfiles\morinreunion - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy %282%29.pubxml" />
+    <Content Include="resources\scss\login.scss" />
     <None Include="resources\scss\site.scss" />
+    <Content Include="views\activities.html" />
+    <Content Include="views\help.html" />
     <Content Include="views\signup.html" />
     <Content Include="views\gallery.html" />
     <Content Include="views\home.html" />
