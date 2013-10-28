@@ -39,8 +39,8 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
   };
 
   $rootScope.checkAuthentication = function () {
-    //if (!$rootScope.authenticated)
-    //  $location.path('/');
+    if (!$rootScope.authenticated)
+      $location.path('/');
   }
 
 }]);

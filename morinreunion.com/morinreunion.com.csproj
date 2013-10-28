@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="views\album.html" />
     <Content Include="views\partials\committee-representatives.html" />
     <Content Include="resources\css\site.css" />
     <Content Include="resources\images\tree.svg" />
