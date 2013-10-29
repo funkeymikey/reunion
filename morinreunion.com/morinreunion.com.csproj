@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="scripts\lib\picturefill.js" />
+    <Content Include="scripts\lib\angular-responsive-images.js" />
     <Content Include="views\album.html" />
     <Content Include="views\partials\committee-representatives.html" />
     <Content Include="styles\css\site.css" />
@@ -70,6 +70,7 @@
     <None Include="Properties\PublishProfiles\morinreunion - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy %282%29.pubxml" />
     <Content Include="styles\scss\login.scss" />
+    <Content Include="styles\scss\album.scss" />
     <None Include="styles\scss\site.scss" />
     <Content Include="views\activities.html" />
     <Content Include="views\help.html" />

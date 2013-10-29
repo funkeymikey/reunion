@@ -96,12 +96,6 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
      });
 }]);
 
-controllers.controller('HomeCtrl', ['$rootScope', '$location', '$scope', function ($rootScope, $location, $scope) {
- // $rootScope.checkAuthentication();
-}]);
-controllers.controller('HelpCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
- // $rootScope.checkAuthentication();
-}]);
-controllers.controller('ActivitesCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
- // $rootScope.checkAuthentication();
-}]);
+controllers.controller('HomeCtrl', function () { });
+controllers.controller('HelpCtrl', function () { });
+controllers.controller('ActivitesCtrl', function () { });

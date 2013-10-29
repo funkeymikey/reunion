@@ -37,8 +37,8 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
   $rootScope.$on("$routeChangeSuccess", function (currentRoute, previousRoute) {
     if (!$rootScope.authenticated) {
       //if somebody hit refresh or tries to access a bookmark - send them to login, ensure that the title is right
-      //$rootScope.currentRoute = { path: '/', title: 'Login' };
-      //$location.path('/');
+      $rootScope.currentRoute = { path: '/', title: 'Login' };
+      $location.path('/');
     }
 
     for (var r in $rootScope.routes)
