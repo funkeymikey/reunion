@@ -1,10 +1,17 @@
-<h1>{{albumHeader.title}}</h1>
+<div class="content">
+  <h1>{{albumHeader.title}}</h1>
+</div>
 
-<ul>
-  <li data-ng-repeat="item in album">
-    <div class="grid_2">
-      <img data-ng-src="{{item.url500}}" alt="{{item.name}}" />
-      <strong>{{item.name}}</strong>
-    </div>
-  </li>
-</ul>
+<div class ="picture-list">
+  <div class="picture-item" data-ng-repeat="item in album">
+    
+    <!-- Use the ng-src-responsive directive to set up your queries and sources -->
+    <img title="{{item.title}}"
+      data-ng-src-responsive="[
+      ['(min-width: 100px)', '{{item.url100}}'],
+      ['(min-width: 260px)', '{{item.url240}}'],
+      ['(min-width: 340px)', '{{item.url320}}'],
+      ['(min-width: 520px)', '{{item.url500}}']
+      ]" />
+  </div>
+</div>

@@ -5,6 +5,12 @@
 body {
   color: #282828; }
 
+footer {
+  height: 5ex; }
+  @media (min-width: 26em) {
+    footer {
+      display: none; } }
+
 .ng-cloak {
   display: none; }
 
@@ -132,9 +138,6 @@ input.ng-invalid,
   width: 100%;
   background-color: white;
   padding: .25ex; }
-  @media (min-width: 26em) {
-    .footer-nav {
-      display: none; } }
 
 .validEmail {
   outline: 0;
@@ -149,3 +152,13 @@ input.ng-invalid,
 
 .login-form {
   padding: 10px 0; }
+
+.picture-list {
+  text-align: center; }
+
+.picture-item {
+  display: inline-block;
+  margin: 2px; }
+
+.picture-item > img {
+  border-radius: 15px; }

@@ -1,0 +1,14 @@
+﻿@import "colors";
+
+.picture-list{
+	text-align: center;
+}
+
+.picture-item{
+	display: inline-block;
+	margin: 2px;
+}
+
+.picture-item > img{
+	border-radius: 15px;
+}

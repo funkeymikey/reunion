@@ -32,6 +32,7 @@
 	padding: 15px;
 }
 
+//the footer navigation - just a dropdown fixed to the bottom of the page
 .footer-nav{
 	position: fixed;
 	height: 5ex;
@@ -40,7 +41,4 @@
 	width: 100%;
 	background-color: white;
 	padding: .25ex;
-	@media (min-width: 26em) {
-    display: none;
-  }
 }

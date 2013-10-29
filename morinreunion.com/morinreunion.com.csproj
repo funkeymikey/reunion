@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="scripts\lib\picturefill.js" />
     <Content Include="views\album.html" />
     <Content Include="views\partials\committee-representatives.html" />
     <Content Include="styles\css\site.css" />

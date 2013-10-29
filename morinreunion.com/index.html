@@ -6,16 +6,15 @@
 
     <title data-ng-bind="'Morin Reunion - ' + currentRoute.title">Morin Family Reunion</title>
     
-    <link href="../styles/css/site.css" rel="stylesheet" />
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../styles/css/site.css" rel="stylesheet" />
     
     <link rel="canonical" href="http://www.morinreunion.com" />
   </head>
 
   <body class="ng-cloak">
 
-    <div class="content">
-      <header>
+      <header class="content">
 
         <!-- logo & title -->
         <div class="header-content">   
@@ -35,15 +34,14 @@
       <!-- the content -->
       <div class="ng-view"></div>
 
-      <footer style="display:block; height:3ex;">
+      <footer class="content footer" data-ng-if="authenticated">
 
         <!-- footer navigation -->
-        <div class="footer-nav" data-ng-if="authenticated">
+        <div class="footer-nav">
           <select class="dropdown" data-ng-model="$root.currentRoute" data-ng-options="r.title for r in routes" data-ng-change="redirect()"></select>     
         </div>
 
       </footer>
-    </div>
     
     <!-- overlay used to block UI while loading -->
     <div data-ng-show="processing" class="overlay"> Loading... </div>
@@ -52,6 +50,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-route.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-resource.js"></script>
+    
+    <script src="scripts/lib/angular-responsive-images.js"></script>
 
     <script src="scripts/app.js"></script>
     <script src="scripts/services.js"></script>

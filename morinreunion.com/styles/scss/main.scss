@@ -3,11 +3,20 @@
 
 
 
-
+// set all text to be off-black
 body {
-    color: $black;
+	color: $black;
 }
 
+// give space at the bottom for the footer nav
+footer{
+ height: 5ex;
+ 	@media (min-width: 26em) {
+    display: none;
+  }
+}
+
+//hide initial unstyled content
 .ng-cloak{
 	display:none;
 }

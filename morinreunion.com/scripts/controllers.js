@@ -81,7 +81,7 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
        for (var i in data.photoset.photo) {
          var item = data.photoset.photo[i];
          $scope.album.push({
-           name: item.title,
+           title: item.title,
            url75x75  : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_s.jpg',
            url150x150: 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_q.jpg',
            url100    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_t.jpg',

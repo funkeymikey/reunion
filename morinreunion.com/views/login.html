@@ -1,17 +1,20 @@
-﻿Welcome to the home of the Morin Family Reunion.  In order to validate access, please enter your email address below to enter.  If your email address is not in the valid list,
-please alert your family's <a data-ng-click="toggleShowRepresentatives()" class="link">representative</a> on the reunion committee to get it added.
+﻿<div class="content">
+  Welcome to the home of the Morin Family Reunion.  In order to validate access, please enter your email address below to enter.  If your email address is not in the valid list,
+  please alert your family's <a data-ng-click="toggleShowRepresentatives()" class="link">representative</a> on the reunion committee to get it added.
  
-<div data-ng-if="showRepresentatives">
-  <h3>Representatives</h3><a data-ng-click="toggleShowRepresentatives()" class="link">hide</a>
-  <div data-ng-include="'views/partials/committee-representatives.html'"></div>
+  <div data-ng-if="showRepresentatives">
+    <h3>Representatives</h3>
+    <a data-ng-click="toggleShowRepresentatives()" class="link">hide</a>
+    <div data-ng-include="'views/partials/committee-representatives.html'"></div>
+  </div>
+
+  <p class="error" data-ng-if="!isValidEmail">
+    The specified email adress is not in the list of valid email addresses.
+  </p>
+
+  <form name="login" class="form-inline" data-ng-submit="validateEmail()">
+    <label for="email-input">Email address</label>
+    <input type="email" class="email-input form-control" placeholder="Email Address" id="email-input" data-ng-model="emailAddress" />
+    <button type="submit" class="btn btn-submit" data-ng-click="validateEmail()">Enter</button>
+  </form>
 </div>
-
-<p class="error" data-ng-if="!isValidEmail">
-  The specified email adress is not in the list of valid email addresses.
-</p>
-
-<form name="login" class="form-inline" data-ng-submit="validateEmail()">
-  <label for="email-input">Email address</label>
-  <input type="email" class="email-input form-control" placeholder="Email Address" id="email-input" data-ng-model="emailAddress" />
-  <button type="submit" class="btn btn-submit" data-ng-click="validateEmail()">Enter</button>
-</form>

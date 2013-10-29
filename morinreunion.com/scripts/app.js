@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'reunion.directives', 'reunion.filters', 'reunion.services']);
+var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'reunion.directives', 'reunion.filters', 'reunion.services', 'ngResponsiveImages']);
 
 reunion.config(['$routeProvider', function ($routeProvider) {
 
@@ -37,8 +37,8 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
   $rootScope.$on("$routeChangeSuccess", function (currentRoute, previousRoute) {
     if (!$rootScope.authenticated) {
       //if somebody hit refresh or tries to access a bookmark - send them to login, ensure that the title is right
-      $rootScope.currentRoute = { path: '/', title: 'Login' };
-      $location.path('/');
+      //$rootScope.currentRoute = { path: '/', title: 'Login' };
+      //$location.path('/');
     }
 
     for (var r in $rootScope.routes)
