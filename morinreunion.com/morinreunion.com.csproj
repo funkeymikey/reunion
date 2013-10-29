@@ -63,13 +63,13 @@
     <Content Include="index.html" />
     <Content Include="views\album.html" />
     <Content Include="views\partials\committee-representatives.html" />
-    <Content Include="resources\css\site.css" />
-    <Content Include="resources\images\tree.svg" />
-    <Content Include="resources\scss\nav.scss" />
+    <Content Include="styles\css\site.css" />
+    <Content Include="styles\scss\nav.scss" />
+    <Content Include="views\partials\tree.html" />
     <None Include="Properties\PublishProfiles\morinreunion - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy %282%29.pubxml" />
-    <Content Include="resources\scss\login.scss" />
-    <None Include="resources\scss\site.scss" />
+    <Content Include="styles\scss\login.scss" />
+    <None Include="styles\scss\site.scss" />
     <Content Include="views\activities.html" />
     <Content Include="views\help.html" />
     <Content Include="views\gallery.html" />
@@ -78,27 +78,16 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="js\app.js" />
-    <Content Include="js\controllers.js" />
-    <Content Include="js\directives.js" />
-    <Content Include="js\filters.js" />
-    <Content Include="js\services.js" />
-    <Content Include="lib\angular\angular-cookies.js" />
-    <Content Include="lib\angular\angular-cookies.min.js" />
-    <Content Include="lib\angular\angular-loader.js" />
-    <Content Include="lib\angular\angular-loader.min.js" />
-    <Content Include="lib\angular\angular-resource.js" />
-    <Content Include="lib\angular\angular-resource.min.js" />
-    <Content Include="lib\angular\angular-sanitize.js" />
-    <Content Include="lib\angular\angular-sanitize.min.js" />
-    <Content Include="lib\angular\angular.js" />
-    <Content Include="lib\angular\angular.min.js" />
-    <Content Include="lib\angular\version.txt" />
+    <Content Include="scripts\app.js" />
+    <Content Include="scripts\controllers.js" />
+    <Content Include="scripts\directives.js" />
+    <Content Include="scripts\filters.js" />
+    <Content Include="scripts\services.js" />
     <None Include="Properties\PublishProfiles\morinreunion - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\morinreunion - Web Deploy.pubxml" />
-    <Content Include="resources\scss\main.scss" />
-    <Content Include="resources\scss\tree.scss" />
-    <Content Include="resources\scss\_colors.scss" />
+    <Content Include="styles\scss\main.scss" />
+    <Content Include="styles\scss\tree.scss" />
+    <Content Include="styles\scss\_colors.scss" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -32,7 +32,7 @@ controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'Email
 
 controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$resource', 'FlickrService',
   function ($rootScope, $location, $scope, $resource, FlickrService) {
-    $rootScope.checkAuthentication();
+  //  $rootScope.checkAuthentication();
 
     var getAllSetsParams = {
       method: 'flickr.photosets.getList',
@@ -61,7 +61,7 @@ controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$re
 
 controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$resource', '$routeParams', 'FlickrService',
    function ($rootScope, $location, $scope, $resource, $routeParams, FlickrService) {
-     $rootScope.checkAuthentication();
+  //   $rootScope.checkAuthentication();
      $scope.albumId = $routeParams.albumId;
 
      var getSetParams = {
@@ -97,11 +97,11 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
 }]);
 
 controllers.controller('HomeCtrl', ['$rootScope', '$location', '$scope', function ($rootScope, $location, $scope) {
-  $rootScope.checkAuthentication();
+ // $rootScope.checkAuthentication();
 }]);
 controllers.controller('HelpCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
-  $rootScope.checkAuthentication();
+ // $rootScope.checkAuthentication();
 }]);
 controllers.controller('ActivitesCtrl', ['$rootScope', '$location', function ($rootScope, $location) {
-  $rootScope.checkAuthentication();
+ // $rootScope.checkAuthentication();
 }]);
