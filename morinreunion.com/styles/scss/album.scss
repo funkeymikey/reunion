@@ -1,12 +1,26 @@
 ﻿@import "colors";
 
+//Display albums in gallery
+.album {
+	width: 250px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.album-text-title {
+	display: block;
+	font-weight: bold;
+}
+
+//Display pictures in album
 .picture-list{
 	text-align: center;
 }
 
 .picture-item{
 	display: inline-block;
-	margin: 2px;
+	margin: 2px 2px 20px 2px;
+	vertical-align: top;
 }
 
 .picture-item > img{

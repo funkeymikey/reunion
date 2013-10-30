@@ -1,11 +1,16 @@
 <div class="content">
   <h1>{{currentRoute.title}}</h1>
 
-  <ul>
-    <li data-ng-repeat="album in gallery">
-      <div class="grid_2">
-        <a href="#/album/{{album.id}}"><img data-ng-src="{{album.imageUrl}}" alt="{{album.title}}" /></a><strong>{{album.title}}</strong>
-      </div>
-    </li>
-  </ul>
+  <div class="album" data-ng-repeat="album in gallery">
+    
+    <div class="album-image">
+      <a href="#/album/{{album.id}}"><img data-ng-src="{{album.imageUrl}}" alt="{{album.title}}" /></a>
+    </div>
+    <div class="album-text">
+      <span class="album-text-title">{{album.title}}</span>
+      <span class="album-text-description">{{album.description}}</span>
+    </div>
+
+  </div>
+
 </div>

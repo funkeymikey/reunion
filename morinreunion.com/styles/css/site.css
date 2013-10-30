@@ -153,12 +153,22 @@ input.ng-invalid,
 .login-form {
   padding: 10px 0; }
 
+.album {
+  width: 250px;
+  display: inline-block;
+  vertical-align: top; }
+
+.album-text-title {
+  display: block;
+  font-weight: bold; }
+
 .picture-list {
   text-align: center; }
 
 .picture-item {
   display: inline-block;
-  margin: 2px; }
+  margin: 2px 2px 20px 2px;
+  vertical-align: top; }
 
 .picture-item > img {
   border-radius: 15px; }

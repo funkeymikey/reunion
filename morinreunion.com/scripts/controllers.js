@@ -36,8 +36,8 @@ controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$re
 
     var getAllSetsParams = {
       method: 'flickr.photosets.getList',
-      api_key: '3ed6bbf8fa206252c06d3710a96dac86',
-      user_id: '106785133@N05',
+      api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
+      user_id: '107133986@N05',
       format: 'json',
       nojsoncallback: '1'
     };
@@ -66,7 +66,7 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
 
      var getSetParams = {
        method: 'flickr.photosets.getPhotos',
-       api_key: '3ed6bbf8fa206252c06d3710a96dac86',
+       api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
        photoset_id: $scope.albumId,
        format: 'json',
        nojsoncallback: '1'
@@ -76,6 +76,7 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
        $scope.album = [];
 
        $scope.albumHeader = { title: data.photoset.title, count: data.photoset.total };
+       $rootScope.currentRoute = { title: $scope.albumHeader.title };
 
        //add every item (photo) in this set to the album
        for (var i in data.photoset.photo) {
@@ -94,6 +95,8 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
          });
        }
      });
+
+     
 }]);
 
 controllers.controller('HomeCtrl', function () { });
