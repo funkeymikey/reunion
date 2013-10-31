@@ -1,14 +1,14 @@
 <div class="content">
   <h1>{{currentRoute.title}}</h1>
 
-  <div class="album" data-ng-repeat="album in gallery">
+  <div class="album" data-ng-repeat="album in gallery" >
     
     <div class="album-image">
       <a href="#/album/{{album.id}}"><img data-ng-src="{{album.imageUrl}}" alt="{{album.title}}" /></a>
     </div>
     <div class="album-text">
-      <span class="album-text-title">{{album.title}}</span>
-      <span class="album-text-description">{{album.description}}</span>
+      <span class="album-text-title" data-ng-bind-html="album.title"></span>
+      <span class="album-text-description" data-ng-bind-html="album.description"></span>
     </div>
 
   </div>
