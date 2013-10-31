@@ -72,6 +72,16 @@ input.ng-invalid,
 .error {
   color: red; }
 
+.col {
+  float: left; }
+
+.block {
+  display: block; }
+
+.with-margin {
+  margin-left: 10px;
+  margin-right: 10px; }
+
 .overlay {
   z-index: 1000;
   border: none;
@@ -172,3 +182,9 @@ input.ng-invalid,
 
 .picture-item > img {
   border-radius: 15px; }
+
+.item {
+  display: block; }
+
+.item-detail {
+  max-width: 50ex; }

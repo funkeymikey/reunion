@@ -59,11 +59,10 @@ controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$re
   });  
 }]);
 
-controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$resource', '$routeParams', 'FlickrService',
-   function ($rootScope, $location, $scope, $resource, $routeParams, FlickrService) {
-  //   $rootScope.checkAuthentication();
+controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService', function ($rootScope, $scope, $routeParams, FlickrService) {
      $scope.albumId = $routeParams.albumId;
 
+     //the parameters required to get this photo set
      var getSetParams = {
        method: 'flickr.photosets.getPhotos',
        api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
@@ -73,7 +72,7 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
      };
 
      FlickrService.get(getSetParams, function (data) {
-       $scope.album = [];
+       $rootScope.album = [];
 
        $scope.albumHeader = { title: data.photoset.title, count: data.photoset.total };
        $rootScope.currentRoute = { title: $scope.albumHeader.title };
@@ -81,23 +80,78 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$location', '$scope', '$reso
        //add every item (photo) in this set to the album
        for (var i in data.photoset.photo) {
          var item = data.photoset.photo[i];
-         $scope.album.push({
+         $rootScope.album.push({
+           id: item.id,
            title: item.title,
-           url75x75  : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_s.jpg',
-           url150x150: 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_q.jpg',
-           url100    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_t.jpg',
-           url240    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_m.jpg',
-           url320    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_n.jpg',
-           url500    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'.jpg',
-           url640    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_z.jpg',
-           url800    : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_c.jpg',
-           url1024   : 'http://farm'+item.farm+'.staticflickr.com/'+item.server+'/'+item.id+'_'+item.secret+'_b.jpg',
+           albumId: $scope.albumId,
+           itemUrl   : '#/item/' + item.id,
+           url75x75  : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_s.jpg',
+           url150x150: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_q.jpg',
+           url100    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_t.jpg',
+           url240    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_m.jpg',
+           url320    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_n.jpg',
+           url500    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg',
+           url640    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_z.jpg',
+           url800    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_c.jpg',
+           url1024   : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_b.jpg',
          });
        }
      });
 
      
 }]);
+
+
+
+controllers.controller('ItemCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService', function ($rootScope, $scope, $routeParams, FlickrService) {
+  $scope.itemId = $routeParams.itemId;
+
+  //find the item in our rootScope.items
+  for (var i in $rootScope.album) {
+    var item = $rootScope.album[i];
+    if (item.id === $scope.itemId)
+      $scope.item = item;
+  }
+
+    
+
+     ////the parameters required to get this photo set
+     //var getSetParams = {
+     //  method: 'flickr.photosets.getPhotos',
+     //  api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
+     //  photoset_id: $scope.albumId,
+     //  format: 'json',
+     //  nojsoncallback: '1'
+     //};
+
+     //FlickrService.get(getSetParams, function (data) {
+     //  $scope.album = [];
+
+     //  $scope.albumHeader = { title: data.photoset.title, count: data.photoset.total };
+     //  $rootScope.currentRoute = { title: $scope.albumHeader.title };
+
+     //  //add every item (photo) in this set to the album
+     //  for (var i in data.photoset.photo) {
+     //    var item = data.photoset.photo[i];
+     //    $rootScope.album.push({
+     //      title: item.title,
+     //      albumId: $scope.albumId,
+     //      id: item.id,
+     //      url75x75: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_s.jpg',
+     //      url150x150: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_q.jpg',
+     //      url100: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_t.jpg',
+     //      url240: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_m.jpg',
+     //      url320: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_n.jpg',
+     //      url500: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg',
+     //      url640: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_z.jpg',
+     //      url800: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_c.jpg',
+     //      url1024: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_b.jpg',
+     //    });
+     //  }
+     //});
+
+
+   }]);
 
 controllers.controller('HomeCtrl', function () { });
 controllers.controller('HelpCtrl', function () { });

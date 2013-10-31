@@ -1,7 +1,8 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'reunion.directives', 'reunion.filters', 'reunion.services', 'ngResponsiveImages', 'ngSanitize']);
+var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'ngResponsiveImages', 'ngSanitize']);
+//'reunion.directives', 'reunion.filters', 'reunion.services',
 
 reunion.config(['$routeProvider', function ($routeProvider) {
 
@@ -14,6 +15,7 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   //other routes
   $routeProvider.when('/', { templateUrl: 'views/login.html', controller: 'LoginCtrl', title: 'Login', caseInsensitiveMatch: true });
   $routeProvider.when('/album/:albumId', { templateUrl: 'views/album.html', controller: 'AlbumCtrl', title: 'View Album', caseInsensitiveMatch: true });
+  $routeProvider.when('/item/:itemId', { templateUrl: 'views/item.html', controller: 'ItemCtrl', title: 'View Item', caseInsensitiveMatch: true });
   $routeProvider.otherwise({ redirectTo: '/' });
 }]);
 
@@ -35,7 +37,7 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
   // 1) check to see if we're not authenticated
   // 2) find the route with the matching path, set it to be the current so the title and footer nav will update
   $rootScope.$on("$routeChangeSuccess", function (currentRoute, previousRoute) {
-    if (!$rootScope.authenticated) {
+    if (!$rootScope.authenticated && $location.host() !== 'localhost') {
       //if somebody hit refresh or tries to access a bookmark - send them to login, ensure that the title is right
       $rootScope.currentRoute = { path: '/', title: 'Login' };
       $location.path('/');

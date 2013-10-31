@@ -93,6 +93,19 @@ input.ng-invalid,
 	color: red;
 }
 
+.col{
+	float:left;
+}
+
+.block{
+	display: block;
+}
+
+.with-margin{
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .overlay{
 	z-index: 1000;
 	border: none;
