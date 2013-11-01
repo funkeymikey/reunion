@@ -132,10 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettings.config" />
-    <None Include="Properties\PublishProfiles\reunionemailservice - FTP %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\reunionemailservice - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\reunionemailservice - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\reunionemailservice - Web Deploy.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\reunionservice - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\reunionservice - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

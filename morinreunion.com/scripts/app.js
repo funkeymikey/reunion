@@ -57,7 +57,7 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
 
 
 reunion.factory('EmailService', ['$resource', function ($resource) {
-    return $resource('http://reunionemailservice.azurewebsites.net/Email', {}, { isArray: false });
+    return $resource('http://reunionservice.azurewebsites.net/Email', {}, { isArray: false });
 }]);
 reunion.factory('FlickrService', ['$resource', function ($resource) {
   return $resource('http://api.flickr.com/services/rest/', {}, { isArray: false });

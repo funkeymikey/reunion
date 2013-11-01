@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "morinreunion.com", "morinreunion.com\morinreunion.com.csproj", "{E6E2D7CC-BB2D-41B0-8A23-AD62B413EE59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3815FA6F-F03F-4F01-A3EE-DF6DD91F2E18}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -21,9 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailIngestor", "Ingestor\EmailIngestor.csproj", "{CE6E9312-540A-424E-ADBB-3ABA1B614867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrTokenGenerator", "FlickrTokenGenerator\FlickrTokenGenerator.csproj", "{DF260CED-E95C-41F9-9175-5E94AD67A542}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrToken", "FlickrTokenGenerator\FlickrToken.csproj", "{DF260CED-E95C-41F9-9175-5E94AD67A542}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlickrUtilities", "FlickrUtilities\FlickrUtilities.csproj", "{1C9251AB-CE37-481C-8BA2-90DD4AF82893}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReunionService", "ReunionService\ReunionService.csproj", "{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,6 @@ Global
 		{E6E2D7CC-BB2D-41B0-8A23-AD62B413EE59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6E2D7CC-BB2D-41B0-8A23-AD62B413EE59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6E2D7CC-BB2D-41B0-8A23-AD62B413EE59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE6E9312-540A-424E-ADBB-3ABA1B614867}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +47,10 @@ Global
 		{1C9251AB-CE37-481C-8BA2-90DD4AF82893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C9251AB-CE37-481C-8BA2-90DD4AF82893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C9251AB-CE37-481C-8BA2-90DD4AF82893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86EDDE6-F40B-44BF-A54B-437BC5EDE38F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

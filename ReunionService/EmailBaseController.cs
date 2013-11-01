@@ -21,8 +21,8 @@ namespace EmailService
     protected CloudBlockBlob GetEmailBlob()
     {
 
-      string connectionString = "DefaultEndpointsProtocol=https;AccountName=" + this.AccountName + "AccountKey=" + this.AccountKey;
-      CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ReunionStorage"].ConnectionString);
+      string connectionString = "DefaultEndpointsProtocol=https;AccountName=" + this.AccountName + ";AccountKey=" + this.AccountKey;
+      CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
       
       CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
