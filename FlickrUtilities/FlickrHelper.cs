@@ -11,7 +11,7 @@ namespace FlickrUtilities
 {
   public class FlickrHelper
   {
-    public static const string FlickrService = "http://api.flickr.com/services/rest/";
+    public const string FlickrService = "http://api.flickr.com/services/rest/";
 
     public string ApiKey { get; set; }
     public string Secret { get; set; }
@@ -90,12 +90,12 @@ namespace FlickrUtilities
       string url = this.BuildQueryStringUrl(FlickrService, parameters);
 
       //make the call, get back a string of json
-      //the posts on flickr take all the parameters in the query string anyway, so we're passing null as the content
+      //the posts on flickr take all the parameters in the query string, so we're passing null as the content
       HttpClient client = new HttpClient();
       HttpResponseMessage response = await client.PostAsync(url, null);
 
       //convert that to a dynamic object
-      dynamic jsonObject = await response.Content.ReadAsAsync<dynamic>();// JsonConvert.DeserializeObjectAsync<dynamic>(content);
+      dynamic jsonObject = await response.Content.ReadAsAsync<dynamic>();
 
       return jsonObject;
     }

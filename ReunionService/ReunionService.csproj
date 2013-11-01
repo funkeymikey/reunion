@@ -106,7 +106,6 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\FlickrController.cs" />
     <Compile Include="EmailBaseController.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

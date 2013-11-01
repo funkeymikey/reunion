@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace EmailService.Controllers
@@ -25,14 +26,15 @@ namespace EmailService.Controllers
       }
     }
 
-    public async void Post(JObject options)
+    public async Task<dynamic> Post(JObject options)
     {
       Dictionary<string, object> dictionary = new Dictionary<string, object>();
       foreach (JProperty prop in options.Properties())
       {
         dictionary.Add(prop.Name, prop.Value.ToString());
       }
-      await this.FlickrHelper.Post(dictionary);
+      dynamic result = await this.FlickrHelper.Post(dictionary);
+      return result;
     }
 
     //protected IDictionary<string, object> GetQueryParameters(string queryString)
