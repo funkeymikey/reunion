@@ -41,9 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FlickrNet">
-      <HintPath>..\packages\FlickrNet.3.8.0\lib\net20\FlickrNet.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.WindowsAzure.Configuration">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.8.0.0\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
@@ -123,20 +120,18 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FlickrUtilities\FlickrUtilities.csproj">
+      <Project>{1c9251ab-ce37-481c-8ba2-90dd4af82893}</Project>
+      <Name>FlickrUtilities</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ConnectionStrings.config" />
-    <Content Include="FlickrNet.chm" />
+    <Content Include="AppSettings.config" />
     <None Include="Properties\PublishProfiles\reunionemailservice - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\reunionemailservice - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\reunionemailservice - Web Deploy %282%29.pubxml" />
