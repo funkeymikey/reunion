@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Flickr Auth Token Generator</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="content-wrapper">
+        <div class="float-left">
+          <p class="site-title">Flickr Auth Token Generator</p>
+        </div>
+        <div class="float-right">
+        </div>
+      </div>
+    </header>
+    <div id="body">
+      @RenderSection("featured", required: false)
+      <section class="content-wrapper main-content clear-fix">
+        @RenderBody()
+      </section>
+    </div>
+    <footer>
+      <div class="content-wrapper">
+        <div class="float-left">
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

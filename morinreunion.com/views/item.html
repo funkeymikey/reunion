@@ -2,7 +2,9 @@
 
 <div class="col with-margin">
   <img data-ng-src="{{item.url1024}}" alt="{{item.title}}"/> 
-  <a href="" class="block">download original</a>
+  <div>Taken: {{item.dateTaken | date}}</div>
+  <div>Uploaded: {{item.dateUploaded | date}}</div>
+  <a data-ng-href="{{item.urlOriginal}}" download="{{item.title}}" class="block">Download Full Size</a>
 </div>
 
 <div class="col with-margin item-detail">
