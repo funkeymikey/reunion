@@ -180,7 +180,7 @@ input.ng-invalid,
   margin: 2px 2px 20px 2px;
   vertical-align: top; }
 
-.picture-item > img {
+.picture-item > a > img {
   border-radius: 15px; }
 
 .item {
