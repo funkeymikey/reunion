@@ -8,9 +8,20 @@ namespace EmailService
 {
   public class EmailBaseController : ApiController
   {
+    private string AccountName
+    {
+      get { return ConfigurationManager.AppSettings["AzureStorageAccountName"]; }
+    }
+
+    private string AccountKey
+    {
+      get { return ConfigurationManager.AppSettings["AzureStorageAccountKey"]; }
+    }
+
     protected CloudBlockBlob GetEmailBlob()
     {
 
+      string connectionString = "DefaultEndpointsProtocol=https;AccountName=" + this.AccountName + "AccountKey=" + this.AccountKey;
       CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.ConnectionStrings["ReunionStorage"].ConnectionString);
       
       CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();

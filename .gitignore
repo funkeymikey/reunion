@@ -163,5 +163,5 @@ pip-log.txt
 .DS_Store
 
 .sass-cache
-ConnectionStrings.config
+AppSettings.config
 Emails.txt

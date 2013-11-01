@@ -18,9 +18,7 @@ namespace EmailService.Controllers
     public dynamic Get()
     {
 
-     // Flickr
-      //var thing = new Flickr("3ed6bbf8fa206252c06d3710a96dac86", "59362e5e470f8a86").token
-
+     
       //string q = Request.RequestUri.Query;
 
       //var dictionary = this.GetQueryParameters(q);
@@ -61,38 +59,7 @@ namespace EmailService.Controllers
       return retval;
     }
 
-    private string GenerateApiSignature(IDictionary<string, object> parameters, string secret)
-    {
-      SortedList<string, object> sorted = new SortedList<string, object>();
-      foreach (KeyValuePair<string, object> pair in parameters)
-      {
-        sorted.Add(pair.Key, pair.Value);
-      }
-
-      StringBuilder sb = new StringBuilder(secret);
-      foreach (KeyValuePair<string, object> pair in sorted)
-      {
-        sb.Append(pair.Key);
-        sb.Append(pair.Value);
-      }
-
-      string signature = this.MD5Hash(sb.ToString());
-
-      return signature;
-    }
-
-    private string MD5Hash(string data)
-    {
-      byte[] hashedBytes;
-
-      using (MD5CryptoServiceProvider csp = new MD5CryptoServiceProvider())
-      {
-        byte[] bytes = Encoding.UTF8.GetBytes(data);
-        hashedBytes = csp.ComputeHash(bytes, 0, bytes.Length);
-      }
-
-      return BitConverter.ToString(hashedBytes).Replace("-", String.Empty).ToLower(CultureInfo.InvariantCulture);
-    }
+    
 
   }
 }
