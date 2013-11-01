@@ -1,29 +1,21 @@
-﻿using System.Configuration;
+﻿using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System.Configuration;
 using System.IO;
 using System.Web.Http;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace EmailService
 {
   public class EmailBaseController : ApiController
   {
-    private string AccountName
-    {
-      get { return ConfigurationManager.AppSettings["AzureStorageAccountName"]; }
-    }
-
-    private string AccountKey
-    {
-      get { return ConfigurationManager.AppSettings["AzureStorageAccountKey"]; }
-    }
+    private string AccountName { get { return ConfigurationManager.AppSettings["AzureStorageAccountName"]; } }
+    private string AccountKey { get { return ConfigurationManager.AppSettings["AzureStorageAccountKey"]; } }
 
     protected CloudBlockBlob GetEmailBlob()
     {
-
       string connectionString = "DefaultEndpointsProtocol=https;AccountName=" + this.AccountName + ";AccountKey=" + this.AccountKey;
       CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
-      
+
       CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
       // Retrieve a reference to a container. 
@@ -42,7 +34,7 @@ namespace EmailService
 
       if (!emailBlob.Exists())
       {
-        //load an empty memory stream. Will create an empty blob.
+        //load an empty memory stream, this will create an empty blob.
         using (MemoryStream ms = new MemoryStream())
           emailBlob.UploadFromStream(ms);
       }

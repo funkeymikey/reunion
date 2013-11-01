@@ -1,57 +1,50 @@
-﻿using System;
+﻿using FlickrUtilities;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Dynamic;
+using System.Configuration;
 using System.Web.Http;
 
 namespace EmailService.Controllers
 {
   public class FlickrController : ApiController
   {
-    public dynamic Get()
+    #region Config Values
+    private string ApiKey { get { return ConfigurationManager.AppSettings["FlickrApiKey"]; } }
+    private string Secret { get { return ConfigurationManager.AppSettings["FlickrApiSecret"]; } }
+    private string AuthToken { get { return ConfigurationManager.AppSettings["FlickrAuthToken"]; } }
+    #endregion
+
+    private FlickrHelper _flickrHelper;
+    private FlickrHelper FlickrHelper
     {
-
-     
-      //string q = Request.RequestUri.Query;
-
-      //var dictionary = this.GetQueryParameters(q);
-
-      //dictionary.Add("api_key", "3ed6bbf8fa206252c06d3710a96dac86");
-      //dictionary.Add("nojsoncallback","1");      
-      //dictionary.Add("format", "json");
-
-      //string signature = this.GenerateApiSignature(dictionary, "59362e5e470f8a86");
-      //dictionary.Add("api_sig", signature);
-
-      //dynamic eoDynamic = this.ToDynamic(dictionary);
-
-      //return eoDynamic;
-      return null;
-    }
-
-    private dynamic ToDynamic(IDictionary<string, object> dictionary)
-    {
-      ExpandoObject eo = new ExpandoObject();
-      ICollection<KeyValuePair<string, object>> eoColl = (ICollection<KeyValuePair<string, object>>)eo;
-
-      foreach (var kvp in dictionary)
-        eoColl.Add(kvp);
-
-      dynamic eoDynamic = eo;
-      return eoDynamic;
-    }
-
-    protected IDictionary<string, object> GetQueryParameters(string queryString)
-    {
-      var retval = new Dictionary<string, object>();
-      foreach (var item in queryString.TrimStart('?').Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries))
+      get
       {
-        var split = item.Split('=');
-        retval.Add(split[0], split[1]);
+        if (_flickrHelper == null)
+          _flickrHelper = new FlickrHelper(this.ApiKey, this.Secret, this.AuthToken);
+        return _flickrHelper;
       }
-      return retval;
     }
 
-    
+    public async void Post(JObject options)
+    {
+      Dictionary<string, object> dictionary = new Dictionary<string, object>();
+      foreach (JProperty prop in options.Properties())
+      {
+        dictionary.Add(prop.Name, prop.Value.ToString());
+      }
+      await this.FlickrHelper.Post(dictionary);
+    }
+
+    //protected IDictionary<string, object> GetQueryParameters(string queryString)
+    //{
+    //  var retval = new Dictionary<string, object>();
+    //  foreach (var item in queryString.TrimStart('?').Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries))
+    //  {
+    //    var split = item.Split('=');
+    //    retval.Add(split[0], split[1]);
+    //  }
+    //  return retval;
+    //}
 
   }
 }

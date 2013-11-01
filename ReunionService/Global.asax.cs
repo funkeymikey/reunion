@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace EmailService
 {
@@ -24,7 +20,7 @@ namespace EmailService
     protected void Application_PreRequestHandlerExecute()
     {
         if (Request.IsCorsRequest())
-            AddCorsHeaders();
+            this.AddCorsHeaders();
     }
 
     /// <summary>
@@ -36,7 +32,7 @@ namespace EmailService
     /// </summary>
     private void AddCorsHeaders()
     {
-        //enable the CORS requests, but signal R automatically adds these if necessary, so check for that
+        //enable the CORS requests, but SignalR automatically adds these if necessary, so check for that
         if (Request.Url.LocalPath.StartsWith("/signalr", StringComparison.InvariantCultureIgnoreCase))
             return;
 
