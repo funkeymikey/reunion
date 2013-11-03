@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="scripts\lib\angular-responsive-images.js" />
     <Content Include="views\album.html" />
