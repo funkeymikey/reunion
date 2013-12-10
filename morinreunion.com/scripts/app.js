@@ -17,6 +17,11 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/album/:albumId', { templateUrl: 'views/album.html', controller: 'AlbumCtrl', title: 'View Album', caseInsensitiveMatch: true });
   $routeProvider.when('/item/:itemId', { templateUrl: 'views/item.html', controller: 'ItemCtrl', title: 'View Item', caseInsensitiveMatch: true });
   $routeProvider.otherwise({ redirectTo: '/' });
+
+}]);
+
+reunion.config(["$httpProvider", function ($httpProvider) {
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }]);
 
 reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootScope, $route, $resource, $location) {

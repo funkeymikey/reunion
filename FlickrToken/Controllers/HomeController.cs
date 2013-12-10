@@ -1,16 +1,8 @@
-﻿using System;
+﻿using FlickrUtilities;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
-using System.Net.Http.Formatting;
-using FlickrUtilities;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace FlickrTokenGenerator.Controllers
 {
@@ -60,7 +52,7 @@ namespace FlickrTokenGenerator.Controllers
           Dictionary<string, object> parameters = new Dictionary<string, object>();
           parameters.Add("method", "flickr.auth.getToken");
           parameters.Add("frob", frob);
-          dynamic result = await flelper.CallMethod(parameters);
+          dynamic result = await flelper.Get(parameters);
 
 
           return View(result);
