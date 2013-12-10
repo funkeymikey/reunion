@@ -31,7 +31,7 @@ namespace FlickrUtilities
       foreach (KeyValuePair<string, object> pair in parameters)
         sorted.Add(pair.Key, pair.Value);
 
-      //build up the string to has, with the secret prepended
+      //build up the string to hash, with the secret prepended
       StringBuilder sb = new StringBuilder(this.Secret);
       foreach (KeyValuePair<string, object> pair in sorted)
       {

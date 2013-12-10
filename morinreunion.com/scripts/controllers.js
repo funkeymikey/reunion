@@ -32,17 +32,8 @@ controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'Email
 
 controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$resource', 'FlickrService',
   function ($rootScope, $location, $scope, $resource, FlickrService) {
-  //  $rootScope.checkAuthentication();
-
-    var getAllSetsParams = {
-      method: 'flickr.photosets.getList',
-      api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
-      user_id: '107133986@N05',
-      format: 'json',
-      nojsoncallback: '1'
-    };
-
-    FlickrService.get(getAllSetsParams, function (data) {
+  
+    FlickrService.get({ method: 'flickr.photosets.getList', user_id: '107133986@N05' }, function (data) {
       $scope.gallery = [];
 
       //add every set (album) returned to our gallery
@@ -56,22 +47,19 @@ controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$re
           imageUrl: 'http://farm' + set.farm + '.staticflickr.com/' + set.server + '/' + set.primary + '_' + set.secret + '_m.jpg'
         });
       }
-  });  
+    });
+
+    $scope.createAlbum = function () {
+      FlickrService.save({method:'flickr.photosets.create', title:'test album', primary_photo_id:'11300568805'}, function (stuff) {
+        var t = stuff;
+      });
+    };
 }]);
 
 controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService', function ($rootScope, $scope, $routeParams, FlickrService) {
      $scope.albumId = $routeParams.albumId;
 
-     //the parameters required to get this photo set
-     var getSetParams = {
-       method: 'flickr.photosets.getPhotos',
-       api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
-       photoset_id: $scope.albumId,
-       format: 'json',
-       nojsoncallback: '1'
-     };
-
-     FlickrService.get(getSetParams, function (data) {
+     FlickrService.get({ method: 'flickr.photosets.getPhotos', photoset_id: $scope.albumId }, function (data) {
        $rootScope.album = [];
 
        $scope.albumHeader = { title: data.photoset.title, count: data.photoset.total };
@@ -106,16 +94,7 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'Fl
 controllers.controller('ItemCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService', function ($rootScope, $scope, $routeParams, FlickrService) {
   $scope.itemId = $routeParams.itemId;
     
-  //the parameters required to get this photo set
-  var getSetParams = {
-    method: 'flickr.photos.getInfo',
-    api_key: 'eb1b291e9260c3fd8114eae3cce119ee',
-    photo_id: $scope.itemId,
-    format: 'json',
-    nojsoncallback: '1'
-  };
-
-  FlickrService.get(getSetParams, function (data) {
+  FlickrService.get({ method: 'flickr.photos.getInfo', photo_id: $scope.itemId}, function (data) {
     var item = data.photo;
     $scope.item = {
       id: item.id,
