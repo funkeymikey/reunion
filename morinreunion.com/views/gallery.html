@@ -1,6 +1,8 @@
 <div class="content">
-  <h1>{{currentRoute.title}}</h1>
-
+  <div class="clearfix">
+    <h1 class="left">{{currentRoute.title}}</h1>
+    <span class="right with-h1 new-album-width"><a class="with-h1-bottom">Create new Album</a></span>
+  </div>
   <div class="album" data-ng-repeat="album in gallery" >
     
     <div class="album-image">

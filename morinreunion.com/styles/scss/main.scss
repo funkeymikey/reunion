@@ -1,8 +1,5 @@
 ﻿@import "colors";
 
-
-
-
 // set all text to be off-black
 body {
 	color: $black;
@@ -14,6 +11,10 @@ footer{
  	@media (min-width: 26em) {
     display: none;
   }
+}
+
+section + section {
+	margin-top: 5ex;
 }
 
 //hide initial unstyled content
@@ -52,9 +53,7 @@ footer{
     }
 }
 
-section + section {
-	margin-top: 5ex;
-}
+
 
 .link{
 	cursor: pointer;
@@ -93,8 +92,13 @@ input.ng-invalid,
 	color: red;
 }
 
-.col{
+
+.left, .col{
 	float:left;
+}
+
+.right{
+	float: right;
 }
 
 .block{
@@ -104,6 +108,20 @@ input.ng-invalid,
 .with-margin{
 	margin-left: 10px;
 	margin-right: 10px;
+}
+
+.with-h1{
+	margin-top: 20px;
+	margin-bottom: 10px;
+	display: inline-block;
+	height: 39px;
+	position:relative;
+}
+
+.with-h1-bottom{
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 
 .overlay{

@@ -11,6 +11,9 @@ footer {
     footer {
       display: none; } }
 
+section + section {
+  margin-top: 5ex; }
+
 .ng-cloak {
   display: none; }
 
@@ -37,9 +40,6 @@ footer {
   @media (max-width: 29.99em) {
     .title {
       font-size: large; } }
-
-section + section {
-  margin-top: 5ex; }
 
 .link {
   cursor: pointer; }
@@ -72,8 +72,11 @@ input.ng-invalid,
 .error {
   color: red; }
 
-.col {
+.left, .col {
   float: left; }
+
+.right {
+  float: right; }
 
 .block {
   display: block; }
@@ -81,6 +84,18 @@ input.ng-invalid,
 .with-margin {
   margin-left: 10px;
   margin-right: 10px; }
+
+.with-h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  height: 39px;
+  position: relative; }
+
+.with-h1-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0; }
 
 .overlay {
   z-index: 1000;
@@ -171,6 +186,9 @@ input.ng-invalid,
 .album-text-title {
   display: block;
   font-weight: bold; }
+
+.new-album-width {
+  width: 10em; }
 
 .picture-list {
   text-align: center; }

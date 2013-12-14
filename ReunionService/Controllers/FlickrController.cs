@@ -9,6 +9,9 @@ using System.Web.Http;
 
 namespace EmailService.Controllers
 {
+  /// <summary>
+  /// This class provides a wrapper around the flickr api to easily make GET / POST calls
+  /// </summary>
   public class FlickrController : ApiController
   {
     #region Config Values
@@ -28,18 +31,28 @@ namespace EmailService.Controllers
       }
     }
 
+    /// <summary>
+    /// Will POST any parameters passed in to the flickr service
+    /// </summary>
+    /// <param name="options">A Json object to pass to flickr.  Usually a contains the "method" key, as well as any required parameters </param>
+    /// <returns></returns>
     public async Task<dynamic> Post(JObject options)
     {
-      Dictionary<string, object> dictionary = new Dictionary<string, object>();
-      foreach (JProperty prop in options.Properties())
-        dictionary.Add(prop.Name, prop.Value.ToString());
-
+      //convert the JObject's properties to a dictionary
+      Dictionary<string, object> dictionary = options.Properties().ToDictionary(prop => prop.Name, prop => (object)prop.Value.ToString());
+      
+      //delegate to the flickr helper
       dynamic result = await this.FlickrHelper.Post(dictionary);
       return result;
     }
 
+    /// <summary>
+    /// Will GET any parameters in the query string to the flickr service
+    /// </summary>
+    /// <returns></returns>
     public async Task<dynamic> Get()
     {
+      //convert the query string to a dictionary
       Dictionary<string, object> dictionary = Request.GetQueryNameValuePairs().ToDictionary(kv => kv.Key, kv=> (object)kv.Value);
       
       dynamic result = await this.FlickrHelper.Get(dictionary);
