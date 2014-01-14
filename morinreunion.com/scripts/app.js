@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'ngResponsiveImages', 'ngSanitize']);
+var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'ngResponsiveImages', 'ngSanitize', 'angularFileUpload']);
 //'reunion.directives', 'reunion.filters', 'reunion.services',
 
 reunion.config(['$routeProvider', function ($routeProvider) {
@@ -16,6 +16,7 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/', { templateUrl: 'views/login.html', controller: 'LoginCtrl', title: 'Login', caseInsensitiveMatch: true });
   $routeProvider.when('/album/:albumId', { templateUrl: 'views/album.html', controller: 'AlbumCtrl', title: 'View Album', caseInsensitiveMatch: true });
   $routeProvider.when('/item/:itemId', { templateUrl: 'views/item.html', controller: 'ItemCtrl', title: 'View Item', caseInsensitiveMatch: true });
+  $routeProvider.when('/createAlbum', { templateUrl: 'views/createAlbum.html', controller: 'CreateAlbumCtrl', title: 'Create Album', caseInsensitiveMatch: true });
   $routeProvider.otherwise({ redirectTo: '/' });
 
 }]);
@@ -66,4 +67,27 @@ reunion.factory('EmailService', ['$resource', function ($resource) {
 }]);
 reunion.factory('FlickrService', ['$resource', function ($resource) {
   return $resource('http://reunionservice.azurewebsites.net/Flickr', {}, { isArray: false });
+}]);
+reunion.factory('FlickrUploadService', ['$resource', function ($resource) {
+  return $resource('http://localhost:53463/FlickrUpload', {}, { isArray: false });
+}]);
+
+reunion.directive("fileread", [function () {
+  return {
+    scope: {
+      fileread: "="
+    },
+    link: function (scope, element, attributes) {
+      element.bind("change", function (changeEvent) {
+        var files = changeEvent.target.files;
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+          scope.$apply(function () {
+            scope.fileread = { file: files[0], bytes: loadEvent.target.result };
+          });
+        }
+        reader.readAsDataURL(changeEvent.target.files[0]);
+      });
+    }
+  }
 }]);

@@ -91,7 +91,7 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'Fl
 
 
 
-controllers.controller('ItemCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService', function ($rootScope, $scope, $routeParams, FlickrService) {
+controllers.controller('ItemCtrl', ['$scope', '$routeParams', 'FlickrService', function ($scope, $routeParams, FlickrService) {
   $scope.itemId = $routeParams.itemId;
     
   FlickrService.get({ method: 'flickr.photos.getInfo', photo_id: $scope.itemId}, function (data) {
@@ -107,9 +107,29 @@ controllers.controller('ItemCtrl', ['$rootScope', '$scope', '$routeParams', 'Fli
       dateTaken: new Date(item.dates.taken),
       url1024    : 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_b.jpg',
       urlOriginal: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.originalsecret + '_o.' + item.originalformat
-    };
-  
+    };  
   });
+
+}]);
+
+
+
+controllers.controller('CreateAlbumCtrl', ['$rootScope', '$scope', '$upload', 'FlickrService', 'FlickrUploadService', function ($rootScope, $scope, $upload, FlickrService, FlickrUploadService) {
+ 
+  
+  $scope.createAlbum = function () {
+    
+    console.log('bytes:' + $scope.fileBytes);
+
+    //first upload any photos
+    FlickrUploadService.save({photo: $scope.fileBytes.bytes, title: $scope.fileBytes.file.name}, function(uploadDone){
+      
+    //then create a new photoset
+    //  FlickrService.save({});
+    });
+
+  };
+
 }]);
 
 controllers.controller('HomeCtrl', function () { });

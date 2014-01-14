@@ -1,0 +1,20 @@
+<div class="content">
+  <h1>Create New Album</h1>
+
+  <div class="form-group">
+    <label for="albumName">Album Name</label>
+    <input type="text" class="form-control" id="albumName" placeholder="Enter Album Name" data-ng-model="albumTitle">
+  </div>
+  <div class="form-group">
+    <label for="albumDescription">Album Description</label>
+    <textarea class="form-control" id="albumDescription" rows="3" placeholder="Enter Album Description" data-ng-model="albumDescription"></textarea>
+  </div>
+
+  <input type="file" ng-model="file" fileread="fileBytes" />
+  
+  <button type="submit" class="btn btn-default" data-ng-click="createAlbum()">Submit</button>
+
+
+
+</div>
+

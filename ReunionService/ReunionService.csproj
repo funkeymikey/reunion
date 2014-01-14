@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FlickrUploadController.cs" />
     <Compile Include="Controllers\EmailListController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\FlickrController.cs" />
@@ -128,7 +129,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppSettings.config" />
