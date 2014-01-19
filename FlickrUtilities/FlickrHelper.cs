@@ -7,24 +7,23 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using System.IO;
 
 namespace FlickrUtilities
 {
   public class FlickrHelper
   {
-    //public const string FlickrService = "http://api.flickr.com/services/rest/";
+    
+    //the flickr api uri
+    private FlickrApiLocation FlickrApi = FlickrApiLocation.MAIN;
 
-    public FlickrApiLocation FlickrApi { get; set; }
     public string ApiKey { get; set; }
     public string Secret { get; set; }
     public string AuthToken { get; set; }
 
     public FlickrHelper(string apiKey, string secret, string authToken = null)
-      : this(FlickrApiLocation.MAIN, apiKey, secret, authToken) { }
-
-    public FlickrHelper(FlickrApiLocation api, string apiKey, string secret, string authToken = null)
     {
-      this.FlickrApi = api;
       this.ApiKey = apiKey;
       this.Secret = secret;
       this.AuthToken = authToken;
@@ -121,23 +120,6 @@ namespace FlickrUtilities
       if (!String.IsNullOrWhiteSpace(this.AuthToken)) parameters.Add("auth_token", this.AuthToken);
       parameters.Add("api_sig", this.GenerateApiSignature(parameters));
 
-
-      if (this.FlickrApi == FlickrApiLocation.UPLOAD)
-      {
-        //Dictionary<string, string> paramStrings = parameters.ToDictionary(x => x.Key, x => (string)x.Value);
-        MultipartFormDataContent  content = new MultipartFormDataContent();
-        foreach(string key in parameters.Keys){
-          content.Add(new StringContent(parameters[key].ToString()), key);
-        }
-
-        HttpClient uploadClient = new HttpClient();
-        HttpResponseMessage uploadResponse = uploadClient.PostAsync(this.FlickrApi.Uri, content).Result;
-
-        dynamic something = uploadResponse.Content.ReadAsAsync<dynamic>().Result;
-        return something;
-      }
-
-
       string url = this.BuildQueryStringUrl(this.FlickrApi.Uri, parameters);
 
       //make the call, get back a string of json
@@ -172,6 +154,45 @@ namespace FlickrUtilities
       string newUrl = sb.Remove(sb.Length - 1, 1).ToString();
 
       return newUrl;
+    }
+
+    public async Task<FlickrUploadResult> Upload(string filename, Stream buffer)
+    {
+      //the non-photo parameters to pass to the flickr upload API
+      Dictionary<string, object> parameters = new Dictionary<string, object>();
+      parameters.Add("api_key", this.ApiKey);
+      if (!String.IsNullOrWhiteSpace(this.AuthToken)) parameters.Add("auth_token", this.AuthToken);
+      parameters.Add("api_sig", this.GenerateApiSignature(parameters));
+
+      //now build the form posting based on those parameters
+      MultipartFormDataContent content = new MultipartFormDataContent();
+      foreach (string key in parameters.Keys)
+          content.Add(new StringContent(parameters[key].ToString()), key);
+      
+      //now add the photo
+      content.Add(new StreamContent(buffer), "photo", filename);
+        
+      //now upload it to the flickr Upload api
+      HttpClient uploadClient = new HttpClient();
+      HttpResponseMessage uploadResponse = await uploadClient.PostAsync(FlickrApiLocation.UPLOAD.Uri, content);
+
+      //read the response and get the uploaded photo id
+      string uploadResponseContent = await uploadResponse.Content.ReadAsStringAsync();
+      string photoid = extractXmlTag("photoid", uploadResponseContent);
+
+      return new FlickrUploadResult (){ Name = filename, Id = photoid };
+    }
+
+    private string extractXmlTag(String tag, string xml)
+    {
+      int startTagStart = xml.IndexOf("<" + tag + ">");
+      int startTagEnd = startTagStart + tag.Length + 2;
+      int endTagStart = xml.IndexOf("</" + tag + ">");
+      int length = endTagStart - startTagEnd;
+
+      string tagContents = xml.Substring(startTagEnd, length);
+      
+      return tagContents;
     }
   }
 

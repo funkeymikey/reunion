@@ -3,7 +3,8 @@
   sass --watch scss/site.scss:css/site.css
   */
 body {
-  color: #282828; }
+  color: #282828;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
 
 footer {
   height: 5ex; }
@@ -198,8 +199,77 @@ input.ng-invalid,
   margin: 2px 2px 20px 2px;
   vertical-align: top; }
 
-.picture-item > a > img {
+.picture-item img {
   border-radius: 15px; }
+
+.picture-upload {
+  max-width: 150px; }
+
+.picture-upload img {
+  max-width: 100%;
+  max-height: 100%; }
+
+.drop-zone {
+  display: block;
+  width: 100%;
+  height: 6em;
+  background-color: rgba(250, 246, 187, 0.8);
+  padding: 1ex;
+  border: dashed 2px #cccccc;
+  border-radius: 4px; }
+
+.drag-over {
+  background-color: rgba(250, 246, 187, 0.3);
+  border-color: #282828;
+  cursor: copy; }
+
+.progress div {
+  font-size: smaller;
+  background: orange;
+  width: 0; }
+
+.file-picker {
+  margin-top: 1em; }
+
+.spinner {
+  margin-top: 50%;
+  text-align: center; }
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #FFF;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+  animation: bouncedelay 1.4s infinite ease-in-out;
+  /* Prevent first frame from flickering when animation starts */
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both; }
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s; }
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s; }
+
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0); }
+
+  40% {
+    -webkit-transform: scale(1); } }
+
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0);
+    -webkit-transform: scale(0); }
+
+  40% {
+    transform: scale(1);
+    -webkit-transform: scale(1); } }
 
 .item {
   display: block; }

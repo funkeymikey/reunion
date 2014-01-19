@@ -9,11 +9,38 @@
     <label for="albumDescription">Album Description</label>
     <textarea class="form-control" id="albumDescription" rows="3" placeholder="Enter Album Description" data-ng-model="albumDescription"></textarea>
   </div>
+  <div class="form-group">
+    <div data-ng-show="dropSupported" class="drop-zone" data-ng-file-drag-over-class="drag-over" data-ng-file-drop="onFileSelect($files);" data-ng-file-drop-available="dropSupported=true">
+      Drag and drop files here or
+      <input class="file-picker" type="file" data-ng-file-select="onFileSelect($files)" multiple>
+    </div>
+    <div data-ng-show="!dropSupported">
+      <input type="file" data-ng-file-select="onFileSelect($files)" multiple>
+    </div>
+  </div>
 
-  <input type="file" ng-model="file" fileread="fileBytes" />
-  
+  <div data-ng-if="selectedFiles.length">
+    <div class="picture-item picture-upload" style="position: relative" data-ng-repeat="file in selectedFiles">
+      <!-- the image -->
+      <div>
+        <button ng-if="uploadResult[$index].id" class="close" data-ng-click="abort($index)">&times;</button> {{file.name}}
+        <img data-ng-if="dataUrls[$index]" data-ng-src="{{dataUrls[$index]}}" />
+
+        <div class="progress" ng-if="progress[$index] && progress[$index] < 100" style="width: {{progress[$index]}}%">{{progress[$index]}}%</div>
+
+      </div>
+      <!--overlay -->
+      <div ng-if="!uploadResult[$index].id" class="overlay">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <button type="submit" class="btn btn-default" data-ng-click="createAlbum()">Submit</button>
-
 
 
 </div>

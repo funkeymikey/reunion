@@ -65,9 +65,6 @@
     <Content Include="scripts\lib\angular-file-upload-shim.js" />
     <Content Include="scripts\lib\angular-file-upload.js" />
     <Content Include="scripts\lib\angular-responsive-images.js" />
-    <Content Include="scripts\lib\lvl-file-upload.js" />
-    <Content Include="scripts\lib\lvl-uuid.js" />
-    <Content Include="scripts\lib\lvl-xhr-post.js" />
     <Content Include="views\album.html" />
     <Content Include="views\createAlbum.html" />
     <Content Include="views\item.html" />

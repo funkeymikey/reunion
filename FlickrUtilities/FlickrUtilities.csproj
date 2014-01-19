@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="FlickrApiLocation.cs" />
     <Compile Include="FlickrHelper.cs" />
+    <Compile Include="FlickrUploadResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

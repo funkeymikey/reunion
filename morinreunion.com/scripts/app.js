@@ -68,26 +68,4 @@ reunion.factory('EmailService', ['$resource', function ($resource) {
 reunion.factory('FlickrService', ['$resource', function ($resource) {
   return $resource('http://reunionservice.azurewebsites.net/Flickr', {}, { isArray: false });
 }]);
-reunion.factory('FlickrUploadService', ['$resource', function ($resource) {
-  return $resource('http://localhost:53463/FlickrUpload', {}, { isArray: false });
-}]);
-
-reunion.directive("fileread", [function () {
-  return {
-    scope: {
-      fileread: "="
-    },
-    link: function (scope, element, attributes) {
-      element.bind("change", function (changeEvent) {
-        var files = changeEvent.target.files;
-        var reader = new FileReader();
-        reader.onload = function (loadEvent) {
-          scope.$apply(function () {
-            scope.fileread = { file: files[0], bytes: loadEvent.target.result };
-          });
-        }
-        reader.readAsDataURL(changeEvent.target.files[0]);
-      });
-    }
-  }
-}]);
+reunion.constant('FlickrUploadUrl', 'http://reunionservice.azurewebsites.net/FlickrUpload');
