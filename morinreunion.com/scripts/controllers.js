@@ -209,6 +209,7 @@ controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$uplo
     }
   };
 
+  
   $scope.createAlbum = function () {
     FlickrService.save({
       method: 'flickr.photosets.create',
@@ -217,8 +218,17 @@ controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$uplo
       primary_photo_id: $scope.uploadResult[0].id
     }, function (data) {
       //now add all the photos to this set
-      var t = data;
-      alert(t);
+      var i = 0;
+      var length = $scope.uploadResult.length;
+      var photosetId = data.photoset.id;
+      for (i = 0; i < length; i++) {
+        //skip any empty ones
+        if ($scope.uploadResult[i] === null)
+          continue;
+
+        //todo: this breaks when adding the primary photo
+        FlickrService.save({ method: 'flickr.photosets.addPhoto', photoset_id: photosetId, photo_id: $scope.uploadResult[i].id });
+      }
     });
   };
 }]);
