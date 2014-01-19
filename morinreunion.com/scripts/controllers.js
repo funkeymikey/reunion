@@ -115,9 +115,9 @@ controllers.controller('ItemCtrl', ['$scope', '$routeParams', 'FlickrService', f
 
 
 
-controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$upload', 'FlickrUploadUrl', function ($scope, $http, $timeout, $upload, FlickrUploadUrl) {
+controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$upload', 'FlickrUploadUrl', 'FlickrService', function ($scope, $http, $timeout, $upload, FlickrUploadUrl, FlickrService) {
 
-  
+  //todo: this controller is too big - move logic into a service or something
 
   //initialize the lists
   $scope.dataUrls = [];
@@ -210,7 +210,16 @@ controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$uplo
   };
 
   $scope.createAlbum = function () {
-    
+    FlickrService.save({
+      method: 'flickr.photosets.create',
+      title: $scope.albumTitle,
+      description: $scope.albumDescription,
+      primary_photo_id: $scope.uploadResult[0].id
+    }, function (data) {
+      //now add all the photos to this set
+      var t = data;
+      alert(t);
+    });
   };
 }]);
 

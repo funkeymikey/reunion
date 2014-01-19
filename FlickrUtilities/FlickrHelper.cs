@@ -40,35 +40,6 @@ namespace FlickrUtilities
       StringBuilder sb = new StringBuilder(this.Secret);
       foreach (KeyValuePair<string, object> pair in sorted)
       {
-        //skip the parameter if its name is "photo"
-        if (pair.Key.Equals("photo", StringComparison.InvariantCultureIgnoreCase))
-          continue;
-
-        sb.Append(pair.Key);
-        sb.Append(pair.Value);
-      }
-
-      //hash it
-      string signature = MD5Hash(sb.ToString());
-
-      return signature;
-    }
-
-    public string GenerateApiSignature(IDictionary<string, string> parameters)
-    {
-      //sort the parameters alphabetically
-      SortedList<string, object> sorted = new SortedList<string, object>();
-      foreach (KeyValuePair<string, string> pair in parameters)
-        sorted.Add(pair.Key, pair.Value);
-
-      //build up the string to hash, with the secret prepended
-      StringBuilder sb = new StringBuilder(this.Secret);
-      foreach (KeyValuePair<string, object> pair in sorted)
-      {
-        //skip the parameter if its name is "photo"
-        if (pair.Key.Equals("photo", StringComparison.InvariantCultureIgnoreCase))
-          continue;
-
         sb.Append(pair.Key);
         sb.Append(pair.Value);
       }
@@ -112,11 +83,12 @@ namespace FlickrUtilities
       return jsonObject;
     }
 
-    public dynamic Post(Dictionary<string, object> parameters)
+    public async Task<dynamic> Post(Dictionary<string, object> parameters)
     {
       //add in the generic parameters
       parameters.Add("api_key", this.ApiKey);
-      
+      parameters.Add("nojsoncallback", "1");
+      parameters.Add("format", "json");
       if (!String.IsNullOrWhiteSpace(this.AuthToken)) parameters.Add("auth_token", this.AuthToken);
       parameters.Add("api_sig", this.GenerateApiSignature(parameters));
 
@@ -125,10 +97,10 @@ namespace FlickrUtilities
       //make the call, get back a string of json
       //the posts on flickr take all the parameters in the query string, so we're passing null as the content
       HttpClient client = new HttpClient();
-      HttpResponseMessage response =  client.PostAsync(url, null).Result;
+      HttpResponseMessage response = await client.PostAsync(url, null);
 
       //convert that to a dynamic object
-      dynamic jsonObject =  response.Content.ReadAsAsync<dynamic>().Result;
+      dynamic jsonObject = await response.Content.ReadAsAsync<dynamic>();
 
       return jsonObject;
 
