@@ -117,12 +117,40 @@ controllers.controller('ItemCtrl', ['$scope', '$routeParams', 'FlickrService', f
 
 controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$upload', 'FlickrUploadUrl', function ($scope, $http, $timeout, $upload, FlickrUploadUrl) {
 
+  
+
   //initialize the lists
   $scope.dataUrls = [];
   $scope.upload = [];
   $scope.uploadResult = [];
   $scope.selectedFiles = [];
   $scope.progress = [];
+
+  $scope.formReady = function () {
+
+    if (!$scope.albumTitle)
+      return false;
+    if ($scope.selectedFiles.length === 0)
+      return false;
+
+    //count the number of non-removed selected files
+    var selectedFilesSize = 0;
+    for (var i = 0; i < $scope.selectedFiles.length; i++)
+      if ($scope.selectedFiles !== null)
+        selectedFilesSize++;
+
+    if (selectedFilesSize === 0)
+      return false;
+
+    //count the number of non-removed uploaded files
+    var uploadResultSize = 0;
+    for (var i = 0; i < $scope.uploadResult.length; i++)
+      if ($scope.uploadResult !== null)
+        uploadResultSize++;
+
+    //all the files are ready if there are the same number as selected & uploaded files
+    return selectedFilesSize === uploadResultSize;
+  };
 
   //this shows the preview while uploading
   var setPreview = function setPreview(fileReader, index) {
@@ -181,6 +209,9 @@ controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$uplo
     }
   };
 
+  $scope.createAlbum = function () {
+    
+  };
 }]);
 
 

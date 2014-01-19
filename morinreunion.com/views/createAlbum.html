@@ -23,14 +23,12 @@
     <div class="picture-item picture-upload" style="position: relative" data-ng-repeat="file in selectedFiles">
       <!-- the image -->
       <div>
-        <button ng-if="uploadResult[$index].id" class="close" data-ng-click="abort($index)">&times;</button> {{file.name}}
-        <img data-ng-if="dataUrls[$index]" data-ng-src="{{dataUrls[$index]}}" />
-
-        <div class="progress" ng-if="progress[$index] && progress[$index] < 100" style="width: {{progress[$index]}}%">{{progress[$index]}}%</div>
-
+        <button data-ng-if="uploadResult[$index].id" class="close" data-ng-click="abort($index)">&times;</button>
+        {{file.name}}
+        <img data-ng-src="{{dataUrls[$index]}}" />
       </div>
       <!--overlay -->
-      <div ng-if="!uploadResult[$index].id" class="overlay">
+      <div data-ng-if="!uploadResult[$index].id" class="overlay">
         <div class="spinner">
           <div class="bounce1"></div>
           <div class="bounce2"></div>
@@ -40,7 +38,7 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-default" data-ng-click="createAlbum()">Submit</button>
+  <button type="submit" ng-disabled="!formReady()" class="btn btn-default" data-ng-click="createAlbum()">Submit</button>
 
 
 </div>
