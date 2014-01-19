@@ -215,7 +215,7 @@ controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$uplo
       method: 'flickr.photosets.create',
       title: $scope.albumTitle,
       description: $scope.albumDescription,
-      primary_photo_id: $scope.uploadResult[0].id
+      primary_photo_id: $scope.uploadResult[0].id //todo: the first might be deleted
     }, function (data) {
       //now add all the photos to this set
       var i = 0;
