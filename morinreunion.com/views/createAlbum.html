@@ -20,15 +20,14 @@
   </div>
 
   <div data-ng-if="selectedFiles.length">
-    <div class="picture-item picture-upload" style="position: relative" data-ng-repeat="file in selectedFiles">
-      <!-- the image -->
+    <div class="picture-upload" data-ng-repeat="file in selectedFiles" ng-if="selectedFiles[$index]">
+      
       <div>
-        <button data-ng-if="uploadResult[$index].id" class="close" data-ng-click="abort($index)">&times;</button>
-        {{file.name}}
-        <img data-ng-src="{{dataUrls[$index]}}" />
+        <span class="name">{{file.name}}</span>
+        <img data-ng-src="{{dataUrls[$index]}}" ng-if="dataUrls[$index]" />
+        <button data-ng-if="uploadResult[$index].id" class="close" data-ng-click="remove($index)">&times;</button>
       </div>
-      <!--overlay -->
-      <!-- todo: why does this cover the save button? -->
+
       <div data-ng-if="!uploadResult[$index].id" class="overlay">
         <div class="spinner">
           <div class="bounce1"></div>

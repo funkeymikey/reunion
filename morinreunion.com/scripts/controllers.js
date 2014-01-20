@@ -3,7 +3,8 @@
 /* Controllers */
 var controllers = angular.module('reunion.controllers', []);
 
-controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'EmailService', function ($rootScope, $scope, $location, EmailService) {
+controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'EmailService',
+function ($rootScope, $scope, $location, EmailService) {
   //if we're hitting this logic, which is only on the login page, assume we're not autheticated
   $rootScope.authenticated = false;
 
@@ -31,33 +32,31 @@ controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'Email
 
 }]);
 
-controllers.controller('GalleryCtrl', ['$rootScope', '$location', '$scope', '$resource', 'FlickrService',
-  function ($rootScope, $location, $scope, $resource, FlickrService) {
 
-    FlickrService.get({ method: 'flickr.photosets.getList', user_id: '107133986@N05' }, function (data) {
-      $scope.gallery = [];
+controllers.controller('GalleryCtrl', ['$scope', 'FlickrService',
+function ($scope, FlickrService) {
 
-      //add every set (album) returned to our gallery
-      for (var i in data.photosets.photoset) {
-        var set = data.photosets.photoset[i];
-        $scope.gallery.push({
-          description: set.description._content,
-          url: 'http://www.flickr.com/photos/106785133@N05/sets/' + set.id,
-          id: set.id,
-          title: set.title._content,
-          imageUrl: 'http://farm' + set.farm + '.staticflickr.com/' + set.server + '/' + set.primary + '_' + set.secret + '_m.jpg'
-        });
-      }
-    });
+  FlickrService.get({ method: 'flickr.photosets.getList', user_id: '107133986@N05' }, function (data) {
+    $scope.gallery = [];
 
-    $scope.createAlbum = function () {
-      FlickrService.save({ method: 'flickr.photosets.create', title: 'test album', primary_photo_id: '11300568805' }, function (stuff) {
-        var t = stuff;
+    //add every set (album) returned to our gallery
+    for (var i in data.photosets.photoset) {
+      var set = data.photosets.photoset[i];
+      $scope.gallery.push({
+        description: set.description._content,
+        url: 'http://www.flickr.com/photos/106785133@N05/sets/' + set.id,
+        id: set.id,
+        title: set.title._content,
+        imageUrl: 'http://farm' + set.farm + '.staticflickr.com/' + set.server + '/' + set.primary + '_' + set.secret + '_m.jpg'
       });
-    };
-  }]);
+    }
+  });
 
-controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService', function ($rootScope, $scope, $routeParams, FlickrService) {
+}]);
+
+
+controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService',
+function ($rootScope, $scope, $routeParams, FlickrService) {
   $scope.albumId = $routeParams.albumId;
 
   FlickrService.get({ method: 'flickr.photosets.getPhotos', photoset_id: $scope.albumId }, function (data) {
@@ -87,14 +86,13 @@ controllers.controller('AlbumCtrl', ['$rootScope', '$scope', '$routeParams', 'Fl
     }
   });
 
-
 }]);
 
 
-
-controllers.controller('ItemCtrl', ['$scope', '$routeParams', 'FlickrService', function ($scope, $routeParams, FlickrService) {
+controllers.controller('ItemCtrl', ['$rootScope', '$scope', '$routeParams', 'FlickrService',
+function ($rootScope, $scope, $routeParams, FlickrService) {
   $scope.itemId = $routeParams.itemId;
-
+  
   FlickrService.get({ method: 'flickr.photos.getInfo', photo_id: $scope.itemId }, function (data) {
     var item = data.photo;
     $scope.item = {
@@ -109,113 +107,104 @@ controllers.controller('ItemCtrl', ['$scope', '$routeParams', 'FlickrService', f
       url1024: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_b.jpg',
       urlOriginal: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.originalsecret + '_o.' + item.originalformat
     };
+    $rootScope.currentRoute = { title: $scope.item.title };
   });
 
 }]);
 
 
+controllers.controller('CreateAlbumCtrl', ['$rootScope', '$scope', '$timeout', '$upload', '$location', 'FlickrUploadUrl', 'FlickrService',
+function ($rootScope, $scope, $timeout, $upload, $location, FlickrUploadUrl, FlickrService) {
 
-controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$upload', 'FlickrUploadUrl', 'FlickrService', function ($scope, $http, $timeout, $upload, FlickrUploadUrl, FlickrService) {
+  $rootScope.currentRoute = { title: 'Create Album' };
 
-  //todo: this controller is too big - move logic into a service or something
+  //starts the upload, and when done, puts the result in uploadResult
+  var previewAndProcess = function (index) {
+
+    var $file = $scope.selectedFiles[index];
+
+    //show the preview
+    if (window.FileReader && $file.type.indexOf('image') > -1) {
+      var fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        $timeout(function () {
+          $scope.dataUrls[index] = e.target.result;
+        });
+      };
+      fileReader.readAsDataURL($file);
+    }
+
+    //process the upload
+    $upload.upload({
+      url: FlickrUploadUrl,
+      method: 'POST',
+      file: $file
+    }).then(function (response) {
+      $scope.uploadResult[index] = response.data[0];
+    });
+  };
 
   //initialize the lists
   $scope.dataUrls = [];
-  $scope.upload = [];
   $scope.uploadResult = [];
   $scope.selectedFiles = [];
-  $scope.progress = [];
 
+  //check to see if the form is able to be submitted
   $scope.formReady = function () {
-
     if (!$scope.albumTitle)
       return false;
     if ($scope.selectedFiles.length === 0)
       return false;
 
     //count the number of non-removed selected files
-    var selectedFilesSize = 0;
-    for (var i = 0; i < $scope.selectedFiles.length; i++)
-      if ($scope.selectedFiles !== null)
-        selectedFilesSize++;
+    var selectedFilesCount = _.countBy($scope.selectedFiles, function (file) {
+      return file === null ? 'empty' : 'full';
+    }).full;
 
-    if (selectedFilesSize === 0)
+    if (selectedFilesCount === 0)
       return false;
 
     //count the number of non-removed uploaded files
-    var uploadResultSize = 0;
-    for (var i = 0; i < $scope.uploadResult.length; i++)
-      if ($scope.uploadResult !== null)
-        uploadResultSize++;
+    var uploadedFilesCount = _.countBy($scope.uploadResult, function (file) {
+      return file === null ? 'empty' : 'full';
+    }).full;
 
-    //all the files are ready if there are the same number as selected & uploaded files
-    return selectedFilesSize === uploadResultSize;
+    //all the files are ready if there are the same number of selected & uploaded files
+    return selectedFilesCount === uploadedFilesCount;
   };
 
-  //this shows the preview while uploading
-  var setPreview = function setPreview(fileReader, index) {
-    fileReader.onload = function (e) {
-      $timeout(function () {
-        $scope.dataUrls[index] = e.target.result;
-      });
-    }
-  };
-
-  //begins the upload
-  var startUpload = function (index) {
-    $scope.progress[index] = 0;
-
-    $scope.upload[index] = $upload.upload({
-      url: FlickrUploadUrl,
-      method: 'POST',
-      file: $scope.selectedFiles[index]
-    }).then(function (response) {
-      $scope.uploadResult[index] = response.data[0];
-    }, null, function (evt) {
-      $scope.progress[index] = parseInt(100.0 * evt.loaded / evt.total);
-    });
-  };
-
-  $scope.hasUploader = function (index) {
-    return $scope.upload[index] != null;
-  };
-  $scope.abort = function (index) {
-    $scope.upload[index].abort();
-    $scope.upload[index] = null;
+  //remove an item from being added to the album
+  $scope.remove = function (index) {
+    //todo: remove the photo from flickr?
     $scope.dataUrls[index] = null;
     $scope.uploadResult[index] = null;
     $scope.selectedFiles[index] = null;
-    $scope.progress[index] = null;
   };
 
+  //upload the selected files
   $scope.onFileSelect = function ($files) {
-   
+
     var oldLength = $scope.selectedFiles.length;
 
     //append the $files to the end of the selectedFiles
     [].push.apply($scope.selectedFiles, $files);
 
-    //loop through each one, showing the preview and starting the upload
-    for (var i = 0; i < $files.length; i++) {
-      var totalIndex = oldLength + i;
-      var $file = $files[i];
-      if (window.FileReader && $file.type.indexOf('image') > -1) {
-        var fileReader = new FileReader();
-        fileReader.readAsDataURL($files[i]);
-        setPreview(fileReader, totalIndex);
-      }
-      
-      startUpload(totalIndex);
+    //handle every new file
+    for (var i = oldLength; i < $scope.selectedFiles.length; i++) {
+      previewAndProcess(i);
     }
   };
 
-  
+  //save the ablum
   $scope.createAlbum = function () {
+
+    var primaryPhoto = _.find($scope.uploadResult, function (result) { return result !== null; });
+
     FlickrService.save({
       method: 'flickr.photosets.create',
       title: $scope.albumTitle,
       description: $scope.albumDescription,
-      primary_photo_id: $scope.uploadResult[0].id //todo: the first might be deleted
+      primary_photo_id: primaryPhoto.id
     }, function (data) {
       //now add all the photos to this set
       var i = 0;
@@ -226,11 +215,17 @@ controllers.controller('CreateAlbumCtrl', ['$scope', '$http', '$timeout', '$uplo
         if ($scope.uploadResult[i] === null)
           continue;
 
-        //todo: this breaks when adding the primary photo
+        //skip the primary photo
+        if ($scope.uploadResult[i].id == primaryPhoto.id)
+          continue;
+
         FlickrService.save({ method: 'flickr.photosets.addPhoto', photoset_id: photosetId, photo_id: $scope.uploadResult[i].id });
       }
+      //now go see the new album
+      $location.path('/album/' + photosetId);
     });
   };
+
 }]);
 
 

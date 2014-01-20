@@ -1,73 +1,80 @@
 <!doctype html>
 
 <html lang="en" data-ng-app="reunion">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title data-ng-bind="'Morin Reunion - ' + currentRoute.title">Morin Family Reunion</title>
-    
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../styles/css/site.css" rel="stylesheet" />
-    
-    <link rel="canonical" href="http://www.morinreunion.com" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  </head>
+  <title data-ng-bind="'Morin Reunion - ' + currentRoute.title">Morin Family Reunion</title>
 
-  <body class="ng-cloak">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../styles/css/site.css" rel="stylesheet" />
 
-      <header class="content">
+  <link rel="canonical" href="http://www.morinreunion.com" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+</head>
 
-        <!-- logo & title -->
-        <div class="header-content">   
-          <span data-ng-include="'views/partials/tree.html'"></span>
-          <span class="title">Morin Family Reunion</span>
-        </div>
+<body class="ng-cloak">
 
-        <!-- header navigation -->
-        <div class="header-nav" data-ng-if="authenticated" >
-          <ul>
-            <li data-ng-repeat="r in routes"><a href="#{{r.path}}">{{r.title}}</a></li>
-          </ul>
-        </div>
+  <header class="content">
 
-      </header>
+    <!-- logo & title -->
+    <div class="header-content">
+      <span data-ng-include="'views/partials/tree.html'"></span>
+      <span class="title">Morin Family Reunion</span>
+    </div>
 
-      <!-- the content -->
-      <div class="ng-view"></div>
+    <!-- header navigation -->
+    <div class="header-nav" data-ng-if="authenticated">
+      <ul>
+        <li data-ng-repeat="r in routes"><a href="#{{r.path}}">{{r.title}}</a></li>
+      </ul>
+    </div>
 
-      <footer class="content footer" data-ng-if="authenticated">
+  </header>
 
-        <!-- footer navigation -->
-        <div class="footer-nav">
-          <select class="dropdown" data-ng-model="$root.currentRoute" data-ng-options="r.title for r in routes" data-ng-change="redirect()"></select>     
-        </div>
+  <!-- the content -->
+  <div class="ng-view"></div>
 
-      </footer>
-    
-    <!-- overlay used to block UI while loading -->
-    <div data-ng-show="processing" class="overlay"> Loading... </div>
+  <footer class="content footer" data-ng-if="authenticated">
 
-    <!-- this needs to be loaded before angular -->
-    <script src="scripts/lib/angular-file-upload-shim.js"></script>
+    <!-- footer navigation -->
+    <div class="footer-nav">
+      <select class="dropdown" data-ng-model="$root.currentRoute" data-ng-options="r.title for r in routes" data-ng-change="redirect()"></select>
+    </div>
 
-    <!-- angular -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-route.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-resource.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-sanitize.js"></script>
-    
-    <!-- plugins -->
-    <script src="scripts/lib/angular-responsive-images.js"></script>
-    <script src="scripts/lib/angular-file-upload.js"></script>
+  </footer>
 
-    <!-- reunion -->
-    <script src="scripts/app.js"></script>    
-    <script src="scripts/controllers.js"></script>
-    <!--<script src="scripts/services.js"></script>
+  <!-- overlay used to block UI while loading -->
+  <div data-ng-show="processing" class="overlay">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+
+  <!-- this needs to be loaded before angular -->
+  <script src="scripts/lib/angular-file-upload-shim.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+
+  <!-- angular -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-route.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-resource.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular-sanitize.min.js"></script>
+
+  <!-- plugins -->
+  <script src="scripts/lib/angular-responsive-images.js"></script>
+  <script src="scripts/lib/angular-file-upload.min.js"></script>
+
+  <!-- reunion -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers.js"></script>
+  <!--<script src="scripts/services.js"></script>
     <script src="scripts/filters.js"></script>
     <script src="scripts/directives.js"></script>-->
-  </body>
+</body>
 </html>
 
