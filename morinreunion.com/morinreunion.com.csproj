@@ -63,7 +63,9 @@
     <Content Include="favicon.ico" />
     <Content Include="index.html" />
     <Content Include="scripts\lib\angular-file-upload-shim.js" />
+    <Content Include="scripts\lib\angular-file-upload-shim.min.js" />
     <Content Include="scripts\lib\angular-file-upload.js" />
+    <Content Include="scripts\lib\angular-file-upload.min.js" />
     <Content Include="scripts\lib\angular-responsive-images.js" />
     <Content Include="views\album.html" />
     <Content Include="views\createAlbum.html" />

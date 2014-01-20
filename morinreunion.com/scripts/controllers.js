@@ -198,6 +198,7 @@ function ($rootScope, $scope, $timeout, $upload, $location, FlickrUploadUrl, Fli
   //save the ablum
   $scope.createAlbum = function () {
 
+    //find the first non-empty photo in our list
     var primaryPhoto = _.find($scope.uploadResult, function (result) { return result !== null; });
 
     FlickrService.save({

@@ -10,7 +10,7 @@ namespace EmailService
     protected void Application_Start()
     {
       // Enable CORS
-      EnableCorsAttribute cors = new EnableCorsAttribute("http://www.morinreunion.com,http://localhost:52529", "*", "*");
+      EnableCorsAttribute cors = new EnableCorsAttribute("http://www.morinreunion.com,http://localhost:52529,http://morinreunion.azurewebsites.net", "*", "*");
       GlobalConfiguration.Configuration.EnableCors(cors);
 
       //camelCase our outgoing javascript
