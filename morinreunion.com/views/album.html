@@ -1,10 +1,14 @@
 
+<div class="content">
+  <div class="clearfix">
+    <h1 class="left with-margin">{{albumHeader.title}}</h1>
+    <span class="right with-h1 new-album-width"><a class="with-h1-bottom" data-ng-href="#/EditAlbum/{{albumId}}">Add to album</a></span>
+  </div>
+</div>
 
-<h1 class="with-margin">{{albumHeader.title}}</h1>
-
-<div class ="picture-list">
+<div class="picture-list">
   <div class="picture-item" data-ng-repeat="item in album">
-    
+
     <a data-ng-href="{{item.itemUrl}}">
       <!-- Use the ng-src-responsive directive to set up your queries and sources -->
       <img title="{{item.title}}"

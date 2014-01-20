@@ -1,0 +1,41 @@
+<div class="content">
+
+  <div class="clearfix">
+    <h1 class="left">Edit {{albumHeader.title}}</h1>
+    <span class="right with-h1 new-album-width"><a class="with-h1-bottom" data-ng-href="#/album/{{albumId}}">Back to album</a></span>
+  </div>
+
+
+  <div class="form-group">
+    <div data-ng-show="dropSupported" class="drop-zone" data-ng-file-drag-over-class="drag-over" data-ng-file-drop="onFileSelect($files);" data-ng-file-drop-available="dropSupported=true">
+      Drag and drop files here or
+      <input class="file-picker" type="file" data-ng-file-select="onFileSelect($files)" multiple>
+    </div>
+    <div data-ng-show="!dropSupported">
+      <input type="file" data-ng-file-select="onFileSelect($files)" multiple>
+    </div>
+  </div>
+
+  <div data-ng-if="selectedFiles.length">
+    <div class="picture-upload" data-ng-repeat="file in selectedFiles" ng-if="selectedFiles[$index]">
+      
+      <div>
+        <span class="name">{{file.name}}</span>
+        <img data-ng-src="{{dataUrls[$index]}}" ng-if="dataUrls[$index]" />
+        <button data-ng-if="uploadResult[$index].id" class="close" data-ng-click="remove($index)">&times;</button>
+      </div>
+
+      <div data-ng-if="!uploadResult[$index].id" class="overlay">
+        <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" ng-disabled="!formReady()" class="btn btn-default" data-ng-click="updateAlbum()">Submit</button>
+
+</div>
+

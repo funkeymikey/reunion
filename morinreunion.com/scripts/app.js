@@ -17,6 +17,7 @@ reunion.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/album/:albumId', { templateUrl: 'views/album.html', controller: 'AlbumCtrl', title: 'View Album', caseInsensitiveMatch: true });
   $routeProvider.when('/item/:itemId', { templateUrl: 'views/item.html', controller: 'ItemCtrl', title: 'View Item', caseInsensitiveMatch: true });
   $routeProvider.when('/createAlbum', { templateUrl: 'views/createAlbum.html', controller: 'CreateAlbumCtrl', title: 'Create Album', caseInsensitiveMatch: true });
+  $routeProvider.when('/editAlbum/:albumId', { templateUrl: 'views/editAlbum.html', controller: 'EditAlbumCtrl', title: 'Edit Album', caseInsensitiveMatch: true });
   $routeProvider.otherwise({ redirectTo: '/' });
 
 }]);
