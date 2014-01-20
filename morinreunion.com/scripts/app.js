@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'ngResponsiveImages', 'ngSanitize', 'angularFileUpload']);
+var reunion = angular.module('reunion', ['ngRoute', 'ngResource', 'reunion.controllers', 'ngResponsiveImages', 'ngSanitize']);
 //'reunion.directives', 'reunion.filters', 'reunion.services',
 
 reunion.config(['$routeProvider', function ($routeProvider) {
@@ -63,10 +63,3 @@ reunion.run(['$rootScope', '$route', '$resource', '$location', function ($rootSc
 }]);
 
 
-reunion.factory('EmailService', ['$resource', function ($resource) {
-    return $resource('http://reunionservice.azurewebsites.net/Email', {}, { isArray: false });
-}]);
-reunion.factory('FlickrService', ['$resource', function ($resource) {
-  return $resource('http://reunionservice.azurewebsites.net/Flickr', {}, { isArray: false });
-}]);
-reunion.constant('FlickrUploadUrl', 'http://reunionservice.azurewebsites.net/FlickrUpload');

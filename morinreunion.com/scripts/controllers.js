@@ -1,7 +1,7 @@
 'use strict';
 
 /* Controllers */
-var controllers = angular.module('reunion.controllers', []);
+var controllers = angular.module('reunion.controllers', ['reunion.services']);
 
 controllers.controller('LoginCtrl', ['$rootScope', '$scope', '$location', 'EmailService',
 function ($rootScope, $scope, $location, EmailService) {
@@ -113,93 +113,40 @@ function ($rootScope, $scope, $routeParams, FlickrService) {
 }]);
 
 
-controllers.controller('CreateAlbumCtrl', ['$rootScope', '$scope', '$timeout', '$upload', '$location', 'FlickrUploadUrl', 'FlickrService',
-function ($rootScope, $scope, $timeout, $upload, $location, FlickrUploadUrl, FlickrService) {
+controllers.controller('CreateAlbumCtrl', ['$rootScope', '$scope', '$timeout', 'FlickrThing', '$location', 'FlickrService',
+function ($rootScope, $scope, $timeout, FlickrThing, $location, FlickrService) {
 
   $rootScope.currentRoute = { title: 'Create Album' };
 
-  //starts the upload, and when done, puts the result in uploadResult
-  var previewAndProcess = function (index) {
-
-    var $file = $scope.selectedFiles[index];
-
-    //show the preview
-    if (window.FileReader && $file.type.indexOf('image') > -1) {
-      var fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        $timeout(function () {
-          $scope.dataUrls[index] = e.target.result;
-        });
-      };
-      fileReader.readAsDataURL($file);
-    }
-
-    //process the upload
-    $upload.upload({
-      url: FlickrUploadUrl,
-      method: 'POST',
-      file: $file
-    }).then(function (response) {
-      $scope.uploadResult[index] = response.data[0];
-    });
-  };
-
   //initialize the lists
-  $scope.dataUrls = [];
-  $scope.uploadResult = [];
-  $scope.selectedFiles = [];
+  FlickrThing.init();
+  $scope.dataUrls = FlickrThing.dataUrls;
+  $scope.uploadResult = FlickrThing.uploadResult;
+  $scope.selectedFiles = FlickrThing.selectedFiles;
 
   //check to see if the form is able to be submitted
   $scope.formReady = function () {
     if (!$scope.albumTitle)
       return false;
-    if ($scope.selectedFiles.length === 0)
-      return false;
-
-    //count the number of non-removed selected files
-    var selectedFilesCount = _.countBy($scope.selectedFiles, function (file) {
-      return file === null ? 'empty' : 'full';
-    }).full;
-
-    if (selectedFilesCount === 0)
-      return false;
-
-    //count the number of non-removed uploaded files
-    var uploadedFilesCount = _.countBy($scope.uploadResult, function (file) {
-      return file === null ? 'empty' : 'full';
-    }).full;
-
-    //all the files are ready if there are the same number of selected & uploaded files
-    return selectedFilesCount === uploadedFilesCount;
+   
+    return FlickrThing.hasFilesUploaded();
   };
 
   //remove an item from being added to the album
   $scope.remove = function (index) {
-    //todo: remove the photo from flickr?
-    $scope.dataUrls[index] = null;
-    $scope.uploadResult[index] = null;
-    $scope.selectedFiles[index] = null;
+    FlickrThing.remove(index);
   };
 
   //upload the selected files
-  $scope.onFileSelect = function ($files) {
-
-    var oldLength = $scope.selectedFiles.length;
-
-    //append the $files to the end of the selectedFiles
-    [].push.apply($scope.selectedFiles, $files);
-
-    //handle every new file
-    for (var i = oldLength; i < $scope.selectedFiles.length; i++) {
-      previewAndProcess(i);
-    }
+  $scope.onFileSelect = function (files) {
+    FlickrThing.addFiles(files);
   };
 
   //save the ablum
   $scope.createAlbum = function () {
     $rootScope.processing = true;
-    //find the first non-empty photo in our list
-    var primaryPhoto = _.find($scope.uploadResult, function (result) { return result !== null; });
+    
+    var primaryPhoto = FlickrThing.getPrimaryPhoto();
 
     FlickrService.save({
       method: 'flickr.photosets.create',
@@ -222,101 +169,43 @@ function ($rootScope, $scope, $timeout, $upload, $location, FlickrUploadUrl, Fli
 
         FlickrService.save({ method: 'flickr.photosets.addPhoto', photoset_id: photosetId, photo_id: $scope.uploadResult[i].id });
       }
-      //now go see the new album
+      //go see the new album after a moment to allow for flickr processing
       $timeout(function () { $rootScope.processing = false; $location.path('/album/' + photosetId); }, 1000);
     });
   };
 
 }]);
 
-controllers.controller('EditAlbumCtrl', ['$rootScope', '$scope', '$timeout', '$routeParams', '$location', '$upload', 'FlickrUploadUrl', 'FlickrService',
-function ($rootScope, $scope, $timeout, $routeParams, $location, $upload, FlickrUploadUrl, FlickrService) {
+controllers.controller('EditAlbumCtrl', ['$rootScope', '$scope', '$timeout', '$routeParams', '$location', 'FlickrThing', 'FlickrService',
+function ($rootScope, $scope, $timeout, $routeParams, $location, FlickrThing, FlickrService) {
   $scope.albumId = $routeParams.albumId;
 
+  //get the album name
   FlickrService.get({ method: 'flickr.photosets.getPhotos', photoset_id: $scope.albumId }, function (data) {
     $scope.albumHeader = { title: data.photoset.title, count: data.photoset.total };
   });
 
 
-  //starts the upload, and when done, puts the result in uploadResult
-  var previewAndProcess = function (index) {
-
-    var $file = $scope.selectedFiles[index];
-
-    //show the preview
-    if (window.FileReader && $file.type.indexOf('image') > -1) {
-      var fileReader = new FileReader();
-      fileReader.onload = function (e) {
-        $timeout(function () {
-          $scope.dataUrls[index] = e.target.result;
-        });
-      };
-      fileReader.readAsDataURL($file);
-    }
-
-    //process the upload
-    $upload.upload({
-      url: FlickrUploadUrl,
-      method: 'POST',
-      file: $file
-    }).then(function (response) {
-      $scope.uploadResult[index] = response.data[0];
-    });
-  };
-
-
-  //remove an item from being added to the album
-  $scope.remove = function (index) {
-    //todo: remove the photo from flickr?
-    $scope.dataUrls[index] = null;
-    $scope.uploadResult[index] = null;
-    $scope.selectedFiles[index] = null;
-  };
-
-
-  //upload the selected files
-  $scope.onFileSelect = function ($files) {
-
-    var oldLength = $scope.selectedFiles.length;
-
-    //append the $files to the end of the selectedFiles
-    [].push.apply($scope.selectedFiles, $files);
-
-    //handle every new file
-    for (var i = oldLength; i < $scope.selectedFiles.length; i++) {
-      previewAndProcess(i);
-    }
-  };
-
-
   //initialize the lists
-  $scope.dataUrls = [];
-  $scope.uploadResult = [];
-  $scope.selectedFiles = [];
+  FlickrThing.init();
+  $scope.dataUrls = FlickrThing.dataUrls;
+  $scope.uploadResult = FlickrThing.uploadResult;
+  $scope.selectedFiles = FlickrThing.selectedFiles;
 
   //check to see if the form is able to be submitted
   $scope.formReady = function () {
-
-    if ($scope.selectedFiles.length === 0)
-      return false;
-
-    //count the number of non-removed selected files
-    var selectedFilesCount = _.countBy($scope.selectedFiles, function (file) {
-      return file === null ? 'empty' : 'full';
-    }).full;
-
-    if (selectedFilesCount === 0)
-      return false;
-
-    //count the number of non-removed uploaded files
-    var uploadedFilesCount = _.countBy($scope.uploadResult, function (file) {
-      return file === null ? 'empty' : 'full';
-    }).full;
-
-    //all the files are ready if there are the same number of selected & uploaded files
-    return selectedFilesCount === uploadedFilesCount;
+    return FlickrThing.hasFilesUploaded();
   };
 
+  //remove an item from being added to the album
+  $scope.remove = function (index) {
+    FlickrThing.remove(index);
+  };
+
+  //upload the selected files
+  $scope.onFileSelect = function (files) {
+    FlickrThing.addFiles(files);
+  };
 
   //save the ablum
   $scope.updateAlbum = function () {
@@ -332,7 +221,8 @@ function ($rootScope, $scope, $timeout, $routeParams, $location, $upload, Flickr
 
       FlickrService.save({ method: 'flickr.photosets.addPhoto', photoset_id: photosetId, photo_id: $scope.uploadResult[i].id });
     }
-    //now go see the new album
+
+    //go see the new album after a moment to allow for flickr processing
     $timeout(function () { $rootScope.processing = false; $location.path('/album/' + photosetId); }, 1000);
   };
 
