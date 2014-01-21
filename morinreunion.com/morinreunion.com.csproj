@@ -68,6 +68,7 @@
     <Content Include="scripts\lib\angular-file-upload.min.js" />
     <Content Include="scripts\lib\angular-responsive-images.js" />
     <Content Include="views\album.html" />
+    <Content Include="views\editAlbum.html" />
     <Content Include="views\createAlbum.html" />
     <Content Include="views\item.html" />
     <Content Include="views\partials\committee-representatives.html" />
