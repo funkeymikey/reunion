@@ -18,11 +18,11 @@
 
   <div data-ng-if="selectedFiles.length">
     <div class="picture-upload" data-ng-repeat="file in selectedFiles" ng-if="selectedFiles[$index]">
-      
+
       <div>
         <span class="name">{{file.name}}</span>
         <img data-ng-src="{{dataUrls[$index]}}" ng-if="dataUrls[$index]" />
-        <button data-ng-if="uploadResult[$index].id" class="close" data-ng-click="remove($index)">&times;</button>
+        <button data-ng-if="uploadResult[$index].id" class="close" data-ng-click="removeUpload($index)">&times;</button>
       </div>
 
       <div data-ng-if="!uploadResult[$index].id" class="overlay">
@@ -37,5 +37,21 @@
 
   <button type="submit" ng-disabled="!formReady()" class="btn btn-default" data-ng-click="updateAlbum()">Submit</button>
 
+</div>
+
+<div class="picture-list">
+  <div class="picture-upload" data-ng-repeat="item in album" ng-if="album[$index]">
+
+    <div>
+      <span class="name">{{item.title}}</span>
+      <!-- Use the ng-src-responsive directive to set up your queries and sources -->
+      <img title="{{item.title}}"
+        data-ng-src-responsive="[
+        ['(min-width: 400px)', '{{item.url100}}'],
+        ['(min-width: 600px)', '{{item.url240}}']
+        ]" />
+      <button class="close" data-ng-click="removeExisting($index)">&times;</button>
+    </div>
+  </div>
 </div>
 

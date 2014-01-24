@@ -180,9 +180,32 @@ controllers.controller('EditAlbumCtrl', ['$rootScope', '$scope', '$timeout', '$r
 function ($rootScope, $scope, $timeout, $routeParams, $location, FlickrThing, FlickrService) {
   $scope.albumId = $routeParams.albumId;
 
+  $scope.album = [];
+
   //get the album name
   FlickrService.get({ method: 'flickr.photosets.getPhotos', photoset_id: $scope.albumId }, function (data) {
     $scope.albumHeader = { title: data.photoset.title, count: data.photoset.total };
+
+
+    //add every exiting item (photo) in this set to the album
+    for (var i in data.photoset.photo) {
+      var item = data.photoset.photo[i];
+      $scope.album.push({
+        id: item.id,
+        title: item.title,
+        albumId: $scope.albumId,
+        itemUrl: '#/item/' + item.id,
+        url75x75: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_s.jpg',
+        url150x150: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_q.jpg',
+        url100: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_t.jpg',
+        url240: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_m.jpg',
+        url320: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_n.jpg',
+        url500: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '.jpg',
+        url640: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_z.jpg',
+        url800: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_c.jpg',
+        url1024: 'http://farm' + item.farm + '.staticflickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_b.jpg'
+      });
+    }
   });
 
 
@@ -198,7 +221,7 @@ function ($rootScope, $scope, $timeout, $routeParams, $location, FlickrThing, Fl
   };
 
   //remove an item from being added to the album
-  $scope.remove = function (index) {
+  $scope.removeUpload = function (index) {
     FlickrThing.remove(index);
   };
 
@@ -225,6 +248,12 @@ function ($rootScope, $scope, $timeout, $routeParams, $location, FlickrThing, Fl
     //go see the new album after a moment to allow for flickr processing
     $timeout(function () { $rootScope.processing = false; $location.path('/album/' + photosetId); }, 1000);
   };
+
+
+  $scope.removeExisting = function (index) {
+    FlickrService.save({ method: 'flickr.photos.delete', photo_id: $scope.album[index].id });
+    $scope.album[index] = null;
+  }
 
 }]);
 

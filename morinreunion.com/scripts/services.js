@@ -9,11 +9,12 @@ reunionServices.factory('EmailService', ['$resource', function ($resource) {
 }]);
 reunionServices.factory('FlickrService', ['$resource', function ($resource) {
   return $resource('http://reunionservice.azurewebsites.net/Flickr', {}, { isArray: false });
+  //return $resource('http://localhost:53463/Flickr', {}, { isArray: false });
 }]);
 reunionServices.constant('FlickrUploadUrl', 'http://reunionservice.azurewebsites.net/FlickrUpload');
 
-reunionServices.factory('FlickrThing', ['$upload', '$timeout', 'FlickrUploadUrl',
-function ($upload, $timeout, FlickrUploadUrl) {
+reunionServices.factory('FlickrThing', ['$upload', '$timeout', 'FlickrUploadUrl', 'FlickrService',
+function ($upload, $timeout, FlickrUploadUrl, FlickrService) {
 
   //define what this object looks like
   function FlickrThing() {
@@ -89,6 +90,9 @@ function ($upload, $timeout, FlickrUploadUrl) {
     };
     
     this.remove = function (index) {
+
+      FlickrService.save({ method: 'flickr.photos.delete', photo_id: this.uploadResult[index].id });
+
       //todo: remove the photo from flickr?
       this.dataUrls[index] = null;
       this.uploadResult[index] = null;
