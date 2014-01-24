@@ -250,11 +250,12 @@ function ($rootScope, $scope, $timeout, $routeParams, $location, FlickrThing, Fl
   };
 
 
-  $scope.removeExisting = function (index) {
+  $scope.deleteExisting = function (index) {
     FlickrService.save({ method: 'flickr.photos.delete', photo_id: $scope.album[index].id });
     $scope.album[index] = null;
-  }
+  };
 
+  
 }]);
 
 controllers.controller('HomeCtrl', function () { });
