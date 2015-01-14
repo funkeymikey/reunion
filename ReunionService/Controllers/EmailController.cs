@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
-using System.Web.Http;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EmailService.Controllers
 {
@@ -8,33 +9,12 @@ namespace EmailService.Controllers
     {
         public async Task<dynamic> Get(string email)
         {
-            CloudBlockBlob emailBlob = this.GetEmailBlob();
-            string emails = await emailBlob.DownloadTextAsync();
+					IEnumerable<String> emails = await this.GetEmails();
+					
+					if(emails.Contains(email.ToLower(), StringComparer.InvariantCultureIgnoreCase))
+						return new { result = true };
 
-            if (!emails.ToLower().Contains(email.ToLower()))
-                return new { result = false };
-
-            return new { result = true };
-        }
-
-        public async Task<dynamic> Post([FromBody]string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return new { result = false, reason = "null input" };
-
-            CloudBlockBlob emailBlob = this.GetEmailBlob();
-            string emails = await emailBlob.DownloadTextAsync();
-
-            //if it already exists, just leave
-            if (emails.ToLower().Contains(email.ToLower()))
-                return new { result = false, reason="Already Exists" };
-
-            //insert a newline delimiter
-            emails += "\n" + email;
-
-            await emailBlob.UploadTextAsync(emails);
-
-            return new { result = true };
+					return new { result = false };
         }
 
     }

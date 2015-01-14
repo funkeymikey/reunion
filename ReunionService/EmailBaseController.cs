@@ -1,46 +1,37 @@
-﻿using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace EmailService
 {
-  public class EmailBaseController : ApiController
-  {
-    private string AccountName { get { return ConfigurationManager.AppSettings["AzureStorageAccountName"]; } }
-    private string AccountKey { get { return ConfigurationManager.AppSettings["AzureStorageAccountKey"]; } }
+	public class EmailBaseController : ApiController
+	{
+		protected string DoolliDatabaseId { get { return ConfigurationManager.AppSettings["DoolliDatabaseId"]; } }
+		protected string DoolliApplicationKey { get { return ConfigurationManager.AppSettings["DoolliApplicationKey"]; } }
 
-    protected CloudBlockBlob GetEmailBlob()
-    {
-      string connectionString = "DefaultEndpointsProtocol=https;AccountName=" + this.AccountName + ";AccountKey=" + this.AccountKey;
-      CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+		protected async Task<IEnumerable<string>> GetEmails()
+		{
+			Uri endpoint = new Uri("https://api.doolli.com/databases/" + DoolliDatabaseId + "?application_key=" + DoolliApplicationKey);
 
-      CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+			//get the dater
+			HttpResponseMessage response = await new HttpClient().GetAsync(endpoint);
+			response.EnsureSuccessStatusCode();
 
-      // Retrieve a reference to a container. 
-      CloudBlobContainer container = blobClient.GetContainerReference("emails");
+			//convert the data to a DoolliDatabase object
+			DoolliDatabase db = await response.Content.ReadAsAsync<DoolliDatabase>();
 
-      if (!container.Exists())
-      {
-        // Create the container if it doesn't already exist.
-        container.CreateIfNotExists();
+			//find the id of the field named "Email"
+			long fieldId = db.Fields.Single(f => f.FieldName == "Email").FieldId;
 
-        container.SetPermissions(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
-      }
+			//get the first value for every field with the matching ID
+			IEnumerable<string> emails = db.Items.Select(i => i.FieldValues[fieldId][0]);
 
-      // Retrieve reference to a blob named "myblob".
-      CloudBlockBlob emailBlob = container.GetBlockBlobReference("emails.txt");
+			return emails;
+		}
 
-      if (!emailBlob.Exists())
-      {
-        //load an empty memory stream, this will create an empty blob.
-        using (MemoryStream ms = new MemoryStream())
-          emailBlob.UploadFromStream(ms);
-      }
-
-      return emailBlob;
-    }
-
-  }
+	}
 }
